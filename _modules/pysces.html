@@ -1,0 +1,1058 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pysces &mdash; Pysces 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Pysces
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/pysces.html">pysces</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Pysces</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>pysces</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pysces</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># coding: utf-8</span>
+
+<span class="c1"># In[3]:</span>
+
+
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.quantum</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sympy.plotting</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">init_printing</span>
+<span class="n">init_printing</span><span class="p">()</span> 
+
+
+<span class="n">I</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="comm_1"><a class="viewcode-back" href="../reference/pysces.html#pysces.comm_1">[docs]</a><span class="k">def</span> <span class="nf">comm_1</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">,</span> <span class="n">commutator_2</span><span class="p">,</span> <span class="n">aux</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function is not used directly, it is only used in the comm() function below. </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        commutator_1: The first operator in the commutator</span>
+<span class="sd">        commutator_2: The second operator in the commutator</span>
+<span class="sd">        aux: The auxiliary function. This is defined below, as F(x).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The commutator of commutator_1 and commutator_2 with respect to the auxiliary function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">expand</span><span class="p">((</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span></div>
+
+
+
+
+<span class="k">def</span> <span class="nf">comm</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">,</span> <span class="n">commutator_2</span><span class="p">,</span> <span class="n">aux</span><span class="p">):</span>
+    <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;L_z, L_y, L_x&quot;</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function has a few different outputs, depending on the parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        commutator_1: the first operator</span>
+<span class="sd">        commutator_2: the second operator</span>
+<span class="sd">        aux: the auxiliary function</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        This function automatically returns a solved commutator. For more complicated commutators involving the angular momentum operators (L_z, L_y, L_x), please make sure that the correct notation is being used (ex: if you want the angular momentum operator in the &quot;x&quot; direction, please use &quot;L_x&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Note:    </span>
+<span class="sd">        x, p_y, y, p_x, z, p_z, L_z, L_y, L_x = symbols(&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;)</span>
+<span class="sd">        L_z = x*p_y - y*p_x</span>
+<span class="sd">        L_y = z*p_x - x*p_z</span>
+<span class="sd">        L_x = y*p_z - z*p_y</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">commutator_1</span> <span class="o">==</span> <span class="n">L_z</span> <span class="ow">and</span> <span class="n">commutator_2</span> <span class="o">==</span> <span class="n">L_y</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">+</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_1</span> <span class="o">==</span> <span class="n">L_z</span> <span class="ow">and</span> <span class="n">commutator_2</span> <span class="o">==</span> <span class="n">L_x</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">+</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_1</span> <span class="o">==</span> <span class="n">L_y</span> <span class="ow">and</span> <span class="n">commutator_2</span> <span class="o">==</span> <span class="n">L_z</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">+</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_1</span> <span class="o">==</span> <span class="n">L_y</span> <span class="ow">and</span> <span class="n">commutator_2</span> <span class="o">==</span> <span class="n">L_x</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">+</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_1</span> <span class="o">==</span> <span class="n">L_x</span> <span class="ow">and</span> <span class="n">commutator_2</span> <span class="o">==</span> <span class="n">L_z</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">+</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_1</span> <span class="o">==</span> <span class="n">L_x</span> <span class="ow">and</span> <span class="n">commutator_2</span> <span class="o">==</span> <span class="n">L_y</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">+</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">commutator_1</span> <span class="o">==</span> <span class="n">L_z</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_1</span> <span class="o">==</span> <span class="n">L_y</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_1</span> <span class="o">==</span> <span class="n">L_x</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_2</span> <span class="o">==</span> <span class="n">L_z</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_2</span> <span class="o">==</span> <span class="n">L_y</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_x</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">commutator_2</span> <span class="o">==</span> <span class="n">L_x</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x, p_y, y, p_x, z, p_z, L_z, L_y, L_x&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">p_z</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span> <span class="o">-</span> <span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="o">*</span><span class="n">p_y</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">expression_replace</span><span class="p">(</span><span class="n">comm_1</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">),</span> <span class="n">aux</span><span class="p">),</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)))</span> <span class="ow">or</span> <span class="n">expression_replace</span><span class="p">(</span><span class="n">comm_1</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">),</span> <span class="n">aux</span><span class="p">),</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)))</span> <span class="ow">or</span> <span class="n">expression_replace</span><span class="p">(</span><span class="n">comm_1</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">),</span> <span class="n">aux</span><span class="p">),</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">))))</span> 
+    
+    
+    
+    
+<div class="viewcode-block" id="factorization"><a class="viewcode-back" href="../reference/pysces.html#pysces.factorization">[docs]</a><span class="k">def</span> <span class="nf">factorization</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:    </span>
+<span class="sd">        expr: the expression of interest</span>
+<span class="sd">        var: the variable of interest. This is most likely going to be the same variable used in the auxiliary function.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:    </span>
+<span class="sd">        The simplified commutator. This is only used when both of the operators in the commutator are angular momentum operators.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;L_z, L_y, L_x&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="n">z</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">comm</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">p_operator</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">z</span><span class="p">))</span><span class="o">*</span><span class="n">L_z</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">comm</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">p_operator</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">*</span><span class="n">L_y</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">comm</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">p_operator</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">L_x</span></div>
+
+        
+    
+<div class="viewcode-block" id="comm_steps"><a class="viewcode-back" href="../reference/pysces.html#pysces.comm_steps">[docs]</a><span class="k">def</span> <span class="nf">comm_steps</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">,</span> <span class="n">commutator_2</span><span class="p">,</span> <span class="n">aux</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:    </span>
+<span class="sd">        commutator_1: the first operator</span>
+<span class="sd">        commutator_2: the second operator</span>
+<span class="sd">        aux: the auxiliary function</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:    </span>
+<span class="sd">        Three main steps used to solve a commutator. The first is the printed commutator in brackets, the second is the expansion, and the third output will be the answer. Please note that as of now, the code does not understand the addition/subtraction/multiplication/division of commutators, and so if there are multiple commutators in a line (ex: comm_steps(comm(A, B) - comm(C, D))) the code will not process this and therefore each individual commutator needs to have its own line.</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="n">Commutator</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">))</span><span class="o">*</span><span class="n">aux</span><span class="p">),</span>\
+                    <span class="n">display</span><span class="p">(</span><span class="n">comm_1</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">),</span> <span class="n">aux</span><span class="p">)),</span>\
+                            <span class="n">display</span><span class="p">(</span><span class="n">expression_replace</span><span class="p">(</span><span class="n">comm_1</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">),</span> <span class="n">aux</span><span class="p">),</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)))</span> \
+                            <span class="ow">or</span> <span class="n">expression_replace</span><span class="p">(</span><span class="n">comm_1</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">),</span> <span class="n">aux</span><span class="p">),</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)))</span> \
+                            <span class="ow">or</span> <span class="n">expression_replace</span><span class="p">(</span><span class="n">comm_1</span><span class="p">(</span><span class="n">Operator</span><span class="p">(</span><span class="n">commutator_1</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">commutator_2</span><span class="p">),</span> <span class="n">aux</span><span class="p">),</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)))</span> <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="p_operator"><a class="viewcode-back" href="../reference/pysces.html#pysces.p_operator">[docs]</a><span class="k">def</span> <span class="nf">p_operator</span><span class="p">(</span><span class="n">var</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    var: The variable that the linear momentum operator is with respect to.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The linear momentum operator, with respect to the parameter.</span>
+<span class="sd"> </span>
+<span class="sd">    Note that the &quot;1&quot; in the derivative is a placeholder, which will be replaced.</span>
+<span class="sd">    If var == None, the general linear operator is printed, with all three positional arguments &quot;x&quot;, &quot;y&quot;, and &quot;z&quot;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">h_b</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;h_b m&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)))</span> <span class="o">+</span> <span class="n">Operator</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span> <span class="o">+</span> <span class="n">Operator</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">z</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">var</span><span class="p">)))</span></div>
+
+
+
+
+<div class="viewcode-block" id="kinetic_energy"><a class="viewcode-back" href="../reference/pysces.html#pysces.kinetic_energy">[docs]</a><span class="k">def</span> <span class="nf">kinetic_energy</span><span class="p">(</span><span class="n">var</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    var: The variable in which the derivative is with respect to.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The kinetic energy operator, with respect to the chosen parameter. </span>
+
+<span class="sd">    Note that the &quot;1&quot; in the derivative is a placeholder, which will be replaced.</span>
+<span class="sd">    If var == None, the general linear operator is printed, with all three positional arguments &quot;x&quot;, &quot;y&quot;, and &quot;z&quot;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">h_b</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;h_b m&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Operator</span><span class="p">((</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)))</span> <span class="o">+</span> <span class="p">(</span><span class="n">Operator</span><span class="p">((</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)))</span> <span class="o">+</span> <span class="p">(</span><span class="n">Operator</span><span class="p">((</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">z</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Operator</span><span class="p">((</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">var</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)))</span></div>
+
+
+
+<div class="viewcode-block" id="v"><a class="viewcode-back" href="../reference/pysces.html#pysces.v">[docs]</a><span class="k">def</span> <span class="nf">v</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    var: The variable for the given function. This is usually &quot;x&quot;, &quot;y&quot; or &quot;z&quot;.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    The general potential energy operator, v(x)</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">)(</span><span class="n">var</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="hamiltonian"><a class="viewcode-back" href="../reference/pysces.html#pysces.hamiltonian">[docs]</a><span class="k">def</span> <span class="nf">hamiltonian</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    var: The variable for the given function. This is usually &quot;x&quot;, &quot;y&quot; or &quot;z&quot;.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    The Hamiltonian operator, made up of the kinetic energy operator and the general potential energy operator.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">kinetic_energy</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="o">+</span> <span class="n">v</span><span class="p">(</span><span class="n">var</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="expression_replace"><a class="viewcode-back" href="../reference/pysces.html#pysces.expression_replace">[docs]</a><span class="k">def</span> <span class="nf">expression_replace</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    This is only used within the &quot;comm()&quot; function. </span>
+<span class="sd">    </span>
+<span class="sd">    expression_replace(expr, var)</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    expr: The expanded commutator to be replaced</span>
+<span class="sd">    var: The variable/parameter with respect to the chosen commutator.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    This replaces the Derivative(1, x) present in the expanded commutator with either Derivative(F(x), x) or Derivative(x*F(x), x).</span>
+<span class="sd">    Note that the above states &quot;x&quot;, but can be done for x, y, or z variables.</span>
+<span class="sd">    This will also replace [p_x, x] and similar commutators, which are usually computed when using angular momentum operators or similar operators.</span>
+<span class="sd">    Note that the &quot;expr&quot; parameter is a str()</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">L_x</span><span class="p">,</span> <span class="n">L_z</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">p_z</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;L_x, L_z, L_y, p_x, p_y, p_z, x, y, z&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;[p_x,x]&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;[p_x,x]&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">expression_replace</span><span class="p">(</span><span class="n">comm</span><span class="p">(</span><span class="n">p_operator</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">)),</span> <span class="n">K</span><span class="p">)))))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_y</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="n">p_z</span><span class="o">*</span><span class="n">y</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">L_x</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">)),</span> <span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;Derivative(1, x)*x*f(x)&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="n">var</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">())))</span>
+    
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;[p_y, y]&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;[p_y,y]&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">expression_replace</span><span class="p">(</span><span class="n">comm</span><span class="p">(</span><span class="n">p_operator</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">)),</span> <span class="n">K</span><span class="p">)))))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_x</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="n">p_z</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">L_y</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">)),</span> <span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;Derivative(1, y)*y*f(y)&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="n">var</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">())))</span>
+    
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;[p_z,z]&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;[p_z,z]&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">expression_replace</span><span class="p">(</span><span class="n">comm</span><span class="p">(</span><span class="n">p_operator</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">Operator</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">)),</span> <span class="n">K</span><span class="p">)))))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p_x</span><span class="o">*</span><span class="n">y</span> <span class="o">-</span> <span class="n">p_y</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">L_z</span><span class="p">)))</span>
+    <span class="k">elif</span> <span class="n">var</span> <span class="o">==</span> <span class="n">z</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">)),</span> <span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;Derivative(1, z)*z*f(z)&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="n">var</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">())))</span></div>
+
+
+
+
+<div class="viewcode-block" id="f"><a class="viewcode-back" href="../reference/pysces.html#pysces.f">[docs]</a><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    var: This is what the auxiliary function is with respect to. It should also match the parameters of the other arguments in the comm() function. (example: if one operator is p_operator(y), the auxiliary function should be f(y).</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    This is the auxiliary function, commonly used in the comm() function.</span>
+<span class="sd">    This simply returns &quot;f(x)&quot;, x being with chosen parameter.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)(</span><span class="n">var</span><span class="p">))</span></div>
+
+
+
+
+<div class="viewcode-block" id="planewave"><a class="viewcode-back" href="../reference/pysces.html#pysces.planewave">[docs]</a><span class="k">def</span> <span class="nf">planewave</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    x: What the function is with respect to.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The PlaneWave function with respect to the parameter.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;k omega t&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="n">I</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="PIB"><a class="viewcode-back" href="../reference/pysces.html#pysces.PIB">[docs]</a><span class="k">def</span> <span class="nf">PIB</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    x: a variable.</span>
+<span class="sd">    L: Length of the box.</span>
+<span class="sd">    n: an integer.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The WaveFunction for Particle in a Box with respect to the chosen parameters.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">sin</span><span class="p">((</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="PIB_normalized"><a class="viewcode-back" href="../reference/pysces.html#pysces.PIB_normalized">[docs]</a><span class="k">def</span> <span class="nf">PIB_normalized</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    x: a variable.</span>
+<span class="sd">    L: Length of the box.</span>
+<span class="sd">    n: an integer.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The normalized WaveFunction for Particle in a Box, with respect to the chosen variables. This answer can also be calculated using the normalize_constant() function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">((</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="moving_gaussian"><a class="viewcode-back" href="../reference/pysces.html#pysces.moving_gaussian">[docs]</a><span class="k">def</span> <span class="nf">moving_gaussian</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    alpha:alpha parameter of the gaussian</span>
+<span class="sd">    x_0: x_0 parameter of the gaussian</span>
+<span class="sd">    p: p parameter of the gaussian</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    The moving gaussian wave function.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">h_b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;alpha x x_0 p h_b&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">I</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="n">h_b</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_0</span><span class="p">)))</span></div>
+
+
+
+
+<div class="viewcode-block" id="fixed_gaussian"><a class="viewcode-back" href="../reference/pysces.html#pysces.fixed_gaussian">[docs]</a><span class="k">def</span> <span class="nf">fixed_gaussian</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    alpha:alpha parameter of the gaussian</span>
+<span class="sd">    x_0: x_0 parameter of the gaussian</span>
+<span class="sd">    p: p parameter of the gaussian</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    The moving gaussian wave function.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">h_b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;alpha x x_0 p h_b&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span></div>
+
+
+
+
+<div class="viewcode-block" id="moving_gaussian_normalized"><a class="viewcode-back" href="../reference/pysces.html#pysces.moving_gaussian_normalized">[docs]</a><span class="k">def</span> <span class="nf">moving_gaussian_normalized</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">p_0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    alpha: alpha parameter of the normalized gaussian</span>
+<span class="sd">    gamma: gamma parameter of the normalized gaussian</span>
+<span class="sd">    x_0: x_0 parameter of the normalized gaussian</span>
+<span class="sd">    p_0: p_0 parameter of the normalized gaussian</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    The normalized gaussian WaveFunction, with respect to the chosen variables.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">p_0</span><span class="p">,</span> <span class="n">h_b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;alpha gamma x x_0 p_0 h_b&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">alpha</span><span class="p">)</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="n">I</span><span class="o">*</span><span class="n">p_0</span><span class="p">)</span><span class="o">/</span><span class="n">h_b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">I</span><span class="o">*</span><span class="n">gamma</span><span class="p">)</span><span class="o">/</span><span class="n">h_b</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="conjugate"><a class="viewcode-back" href="../reference/pysces.html#pysces.conjugate">[docs]</a><span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    x: The term of interest. This is commonly a WaveFunction.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The complex conjugate of a WaveFunction. If there are imaginary terms, they get negated, and if there are no imaginary terms, the WaveFunction is not affected.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="o">-</span><span class="n">I</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="normalize_constant"><a class="viewcode-back" href="../reference/pysces.html#pysces.normalize_constant">[docs]</a><span class="k">def</span> <span class="nf">normalize_constant</span><span class="p">(</span><span class="n">wavefunc</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    wavefunc: The WaveFunction/expression of interest</span>
+<span class="sd">    var: What the integral is taken with respect to</span>
+<span class="sd">    lower: The lower bound of the integral. If bounds are not listed, this is -oo</span>
+<span class="sd">    upper: The upper bound of the integral. If bounds are not listed, this is oo</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The normalization constant, with respect to the given parameters. To find the normalized WaveFunction, the output for normalize_constant() must be multiplied by the original WaveFunction. A normalized WaveFunction indicates that the probability of finding a particle within certain bounds must be equal to one.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nreps</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">initial</span> <span class="o">=</span> <span class="p">[</span> <span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="p">)]</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Integral</span><span class="p">(</span><span class="n">wavefunc</span><span class="o">*</span><span class="n">conjugate</span><span class="p">(</span><span class="n">wavefunc</span><span class="p">),</span> <span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nreps</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">initial</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">final</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+     
+    <span class="k">return</span> <span class="n">simplify</span><span class="p">(</span> <span class="n">res</span> <span class="p">)</span></div>
+    
+    <span class="c1">#return simplify( 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)) )</span>
+
+
+
+
+<div class="viewcode-block" id="expectation_value"><a class="viewcode-back" href="../reference/pysces.html#pysces.expectation_value">[docs]</a><span class="k">def</span> <span class="nf">expectation_value</span><span class="p">(</span><span class="n">wavefunc_1</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">wavefunc_2</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes a symbolic expression for an expectation value of an operator `operator`</span>
+<span class="sd">    with the two wavefunctions: `&lt;WaveFunc_1|operator|WaveFunc_2&gt;` </span>
+
+<span class="sd">    Args:    </span>
+<span class="sd">        wavefunc_1: The &quot;bra&quot; normalized WaveFunction</span>
+<span class="sd">        operator: The operator of interest</span>
+<span class="sd">        wavefunc_2: The &quot;ket&quot; normalized WaveFunction</span>
+<span class="sd">        var: What the integral is taken with respect to</span>
+<span class="sd">        lower: The lower bound of the integral. If bounds are not listed, this is -oo</span>
+<span class="sd">        upper: The upper bound of the integral. If bounds are not listed, this is oo</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The expectation value for the given operator and normalized WaveFunction. </span>
+<span class="sd">        An expectation value is the average value of an operator for a given WaveFunction. </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    
+    <span class="k">if</span> <span class="n">operator</span> <span class="o">==</span> <span class="n">kinetic_energy</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Integral</span><span class="p">(</span><span class="n">conjugate</span><span class="p">(</span><span class="n">wavefunc_1</span><span class="p">)</span><span class="o">*</span><span class="n">operator</span><span class="p">,</span> <span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="n">wavefunc_1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">))))</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;sin(pi*n)&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;cos(pi*n)&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">operator</span> <span class="o">==</span> <span class="n">p_operator</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Integral</span><span class="p">(</span><span class="n">conjugate</span><span class="p">(</span><span class="n">wavefunc_1</span><span class="p">)</span><span class="o">*</span><span class="n">operator</span><span class="p">,</span> <span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">Derivative</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">wavefunc_1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span> 
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Integral</span><span class="p">(</span><span class="n">conjugate</span><span class="p">(</span><span class="n">wavefunc_1</span><span class="p">)</span><span class="o">*</span><span class="n">operator</span><span class="o">*</span><span class="n">wavefunc_2</span><span class="p">,</span> <span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="overlap"><a class="viewcode-back" href="../reference/pysces.html#pysces.overlap">[docs]</a><span class="k">def</span> <span class="nf">overlap</span><span class="p">(</span><span class="n">WaveFunc_1</span><span class="p">,</span> <span class="n">WaveFunc_2</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes a symbolic expression for an overlap of two functions, `&lt;WaveFunc_1|WaveFunc_2&gt;`</span>
+
+<span class="sd">    Args:    </span>
+<span class="sd">        WaveFunc_1: The &quot;bra&quot; normalized WaveFunction</span>
+<span class="sd">        WaveFunc_2: The &quot;ket&quot; normalized WaveFunction</span>
+<span class="sd">        var: What the integral is taken with respect to</span>
+<span class="sd">        lower: The lower bound of the integral. If bounds are not listed, this is -oo</span>
+<span class="sd">        upper: The upper bound of the integral. If bounds are not listed, this is oo </span>
+<span class="sd">        </span>
+<span class="sd">    Returns:    </span>
+<span class="sd">        The overlap of the two WaveFunctions of interest over given bounds. </span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">Integral</span><span class="p">(</span><span class="n">WaveFunc_1</span><span class="o">*</span><span class="n">WaveFunc_2</span><span class="p">,</span> <span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">))</span></div>
+
+
+
+
+<div class="viewcode-block" id="plot_function"><a class="viewcode-back" href="../reference/pysces.html#pysces.plot_function">[docs]</a><span class="k">def</span> <span class="nf">plot_function</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    func: The function/Normalized WaveFunction of interest</span>
+<span class="sd">    B: This is &quot;x&quot; usually (x-axis)</span>
+<span class="sd">    lower: The lower bound of the x-axis domain (for Particle in a Box, 0)</span>
+<span class="sd">    upper: The upper bound of the x-axis domain (for Particle in a Box, 1)</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    A plotted function of the function/Normalized WaveFunction of interest.</span>
+
+<span class="sd">    Note that the cell often has to be run TWICE in order to print the plot/graph.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+        
+    <span class="k">return</span> <span class="n">plot</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">func</span><span class="p">)),</span> <span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">))</span></div>
+
+
+
+
+<div class="viewcode-block" id="laguerre"><a class="viewcode-back" href="../reference/pysces.html#pysces.laguerre">[docs]</a><span class="k">def</span> <span class="nf">laguerre</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    r: What the equation is with respect to. This is commonly &quot;r&quot; or &quot;x&quot;</span>
+<span class="sd">    n: The principle Quantum Number</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The Laguerre polynomial. This is commonly used to solve the laguerre_assoc() function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">simplify</span><span class="p">((</span><span class="n">exp</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="n">n</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span></div>
+
+
+
+
+<div class="viewcode-block" id="laguerre_2"><a class="viewcode-back" href="../reference/pysces.html#pysces.laguerre_2">[docs]</a><span class="k">def</span> <span class="nf">laguerre_2</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    r: What the equation is with respect to. This is commonly &quot;r&quot; or &quot;x&quot;</span>
+<span class="sd">    n: The principle Quantum Number</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The Laguerre polynomial, without simplification and without the derivative computed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="n">n</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span></div>
+
+
+
+
+<div class="viewcode-block" id="laguerre_assoc"><a class="viewcode-back" href="../reference/pysces.html#pysces.laguerre_assoc">[docs]</a><span class="k">def</span> <span class="nf">laguerre_assoc</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    n: The principle Quantum Number</span>
+<span class="sd">    l: The angular momentum Quantum Number</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    The Laguerre Associated polynomial, commonly used to solve the radial function.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">simplify</span><span class="p">(((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="n">Derivative</span><span class="p">(</span><span class="n">laguerre_2</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="n">l</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">l</span><span class="p">))</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="kronecker"><a class="viewcode-back" href="../reference/pysces.html#pysces.kronecker">[docs]</a><span class="k">def</span> <span class="nf">kronecker</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    i: this is usually &quot;i&quot; and the first variable of the kronecker delta.</span>
+<span class="sd">    j: this is usually given a numerical value, and is the second variable of the kronecker delta.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    This function does not print anything, but instead is used in conjunction with the code found in the kronecker_delta file on:</span>
+<span class="sd">    https://github.com/liz-stippell/Pysces</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+    
+    
+    
+<span class="sd">&quot;&quot;&quot; The following is for harmonic oscillators, ladder operators &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="a_raising"><a class="viewcode-back" href="../reference/pysces.html#pysces.a_raising">[docs]</a><span class="k">def</span> <span class="nf">a_raising</span><span class="p">(</span><span class="n">A</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    A: this is usually either empty, (no parameter), &quot;normalized&quot; for the normalized ladder operator, or a &quot;symbol&quot; for the symbolic representation of the parameter.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    Either the mathematic representation of the &quot;a&quot; raising operator (commonly used in harmonic oscillator problems), the normalized raising operator (in dirac notation), or the symbol notation of the operator.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">h_b</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a_R</span><span class="p">,</span> <span class="n">normalized</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;h_b m omega p x a_+ normalized n symbol&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">omega</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">I</span><span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="n">normalized</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Bra</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">Ket</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="n">symbol</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a_R</span></div>
+
+
+    
+        
+<div class="viewcode-block" id="a_lowering"><a class="viewcode-back" href="../reference/pysces.html#pysces.a_lowering">[docs]</a><span class="k">def</span> <span class="nf">a_lowering</span><span class="p">(</span><span class="n">A</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        A: this is usually either empty, (no parameter), &quot;normalized&quot; for the normalized ladder operator,</span>
+<span class="sd">        or a &quot;symbol&quot; for the symbolic representation of the parameter.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:    </span>
+<span class="sd">        Either the mathematic representation of the &quot;a&quot; lowering operator (commonly used in harmonic oscillator problems),</span>
+<span class="sd">        the normalized lowering operator (in dirac notation), or the symbol notation of the operator.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">h_b</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a_L</span><span class="p">,</span> <span class="n">normalized</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;h_b m omega p x a_- normalized n symbol&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h_b</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">omega</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">I</span><span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="n">x</span><span class="p">))</span> 
+    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="n">normalized</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Bra</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">Ket</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="o">==</span> <span class="n">symbol</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a_L</span></div>
+
+
+
+<div class="viewcode-block" id="x_ladder"><a class="viewcode-back" href="../reference/pysces.html#pysces.x_ladder">[docs]</a><span class="k">def</span> <span class="nf">x_ladder</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    At this time, there are no parameters necessary.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;x&quot; with respect to the &quot;a&quot; raising/lowering operators</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">h_b</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;h_b m omega symbol&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h_b</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">omega</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">a_raising</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="o">+</span><span class="n">a_lowering</span><span class="p">(</span><span class="n">symbol</span><span class="p">)))</span></div>
+
+
+
+
+<div class="viewcode-block" id="simplify_ladder"><a class="viewcode-back" href="../reference/pysces.html#pysces.simplify_ladder">[docs]</a><span class="k">def</span> <span class="nf">simplify_ladder</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    expr: the expression of interest</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    The simplified expression, replacing any a_rasing(symbol)**2 with 0, a_lowering(symbol)**2 with 0, and 2*a_raising(symbol)*a_lowering(symbol) with (2*n+1). </span>
+<span class="sd">    </span>
+<span class="sd">    Please note that the code does not &quot;understand&quot; the difference between a_raising(symbol)*a_lowering(symbol) and a_lowering(symbol)*a_raising(symbol) which are mathematically different and produce different outcomes.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">symbol</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;symbol n&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Bra</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">simplify</span><span class="p">(</span><span class="n">expand</span><span class="p">(</span><span class="n">simplify</span><span class="p">(</span><span class="n">expand</span><span class="p">(</span><span class="n">expr</span><span class="p">))))</span><span class="o">.</span><span class="n">replace</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">a_raising</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="o">*</span><span class="n">a_lowering</span><span class="p">(</span><span class="n">symbol</span><span class="p">)),</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">a_raising</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">a_lowering</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">*</span><span class="n">Ket</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="HO"><a class="viewcode-back" href="../reference/pysces.html#pysces.HO">[docs]</a><span class="k">def</span> <span class="nf">HO</span><span class="p">(</span><span class="n">condition</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        condition: the condition of the harmonic oscillator. Examples include: &quot;ground_state&quot; or &quot;ladder&quot;. </span>
+<span class="sd">            This can also be left blank to give the general definition of a harmonic oscillator.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The Harmonic Oscillator Hamiltonian. Note that &quot;p&quot; is the linear momentum operator, and so the </span>
+<span class="sd">        first term is the kinetic_energy() function mentioned above.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">h_b</span><span class="p">,</span> <span class="n">ladder</span><span class="p">,</span> <span class="n">ground_state</span><span class="p">,</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;p k m x alpha omega h_b ladder ground_state symbol&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">condition</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">condition</span> <span class="o">==</span> <span class="n">ladder</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">h_b</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="p">(</span><span class="n">a_lowering</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="o">*</span><span class="n">a_raising</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">condition</span> <span class="o">==</span> <span class="n">ground_state</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">((</span><span class="n">alpha</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">m</span><span class="o">*</span><span class="n">omega</span><span class="p">)</span><span class="o">/</span><span class="n">h_b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span></div>
+    
+
+<span class="sd">&quot;&quot;&quot; The following are for Spherical Harmonics &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="spherical"><a class="viewcode-back" href="../reference/pysces.html#pysces.spherical">[docs]</a><span class="k">def</span> <span class="nf">spherical</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    </span>
+<span class="sd">    expr: The expression of interest to be changed into spherical coordinates</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">    The expression of interest, A, in terms of spherical coordinates</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x r theta phi y z&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">r</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">r</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="L_2"><a class="viewcode-back" href="../reference/pysces.html#pysces.L_2">[docs]</a><span class="k">def</span> <span class="nf">L_2</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:    </span>
+<span class="sd">        j: The total angular momentum quantum number</span>
+<span class="sd">        m: The magnetic quantum number</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:    </span>
+<span class="sd">        The L^2 vector magnitude eigenvalue for spherical harmonics.</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        Bra(str(j), str(&quot;,&quot;), str(m))*j*(j+1)*h_b**2*Ket(str(j), str(&quot;,&quot;), str(m))</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">h_b</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;h_b&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h_b</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span> </div>
+
+
+
+<div class="viewcode-block" id="L_z"><a class="viewcode-back" href="../reference/pysces.html#pysces.L_z">[docs]</a><span class="k">def</span> <span class="nf">L_z</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:    </span>
+<span class="sd">        j: The total angular momentum quantum number</span>
+<span class="sd">        m: The magnetic quantum number</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:    </span>
+<span class="sd">        The L_z projection (in the z direction) eigenvalue for spherical harmonics.</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        Bra(str(j), str(&quot;,&quot;), str(m))*m*h_b*Ket(str(j), str(&quot;,&quot;), str(m))</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">h_b</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;h_b&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">m</span><span class="o">*</span><span class="n">h_b</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span> </div>
+
+
+
+<div class="viewcode-block" id="L_raising_operator"><a class="viewcode-back" href="../reference/pysces.html#pysces.L_raising_operator">[docs]</a><span class="k">def</span> <span class="nf">L_raising_operator</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:    </span>
+<span class="sd">        j: The total angular momentum quantum number</span>
+<span class="sd">        m: The magnetic quantum number</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:    </span>
+<span class="sd">        If j == None and m == None, the general formula for the raising operator for spherical harmonics is returned.    </span>
+<span class="sd">        Else, the formula for the raising operator is computed using Dirac notation</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        Bra(str(j), str(&quot;,&quot;), str(m))*h_b*sqrt(j*(j+1)-m*(m+1))*Ket(str(j), str(&#39;,&#39;), str(m+1))</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">          \\langle j, m | \\hbar \\sqrt{ j (j+1) - m (m+1) }  | j, m+1 \\rangle</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">L_x</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">h_b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;L_x L_y h_b&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">m</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">L_x</span><span class="p">)</span> <span class="o">+</span> <span class="n">I</span><span class="o">*</span><span class="n">Operator</span><span class="p">(</span><span class="n">L_y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">h_b</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span> </div>
+
+    
+
+<div class="viewcode-block" id="L_lowering_operator"><a class="viewcode-back" href="../reference/pysces.html#pysces.L_lowering_operator">[docs]</a><span class="k">def</span> <span class="nf">L_lowering_operator</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:    </span>
+<span class="sd">        j: The total angular momentum quantum number</span>
+<span class="sd">        m: The magnetic quantum number</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:    </span>
+<span class="sd">        If j == None and m == None, the general formula for the lowering operator for spherical harmonics is returned.    </span>
+<span class="sd">        Else, the formula for the lowering operator is computed using Dirac notation</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        Bra(str(j), str(&quot;,&quot;), str(m))*h_b*sqrt(j*(j+1)-m*(m-1))*Ket(str(j), str(&#39;,&#39;), str(m-1))</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+        
+    <span class="n">L_x</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">h_b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;L_x L_y h_b&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">m</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">L_x</span><span class="p">)</span> <span class="o">-</span> <span class="n">I</span><span class="o">*</span><span class="n">Operator</span><span class="p">(</span><span class="n">L_y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+       <span class="k">return</span> <span class="n">h_b</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span> 
+       <span class="k">return</span> <span class="mi">0</span> </div>
+
+
+    
+<div class="viewcode-block" id="L_x"><a class="viewcode-back" href="../reference/pysces.html#pysces.L_x">[docs]</a><span class="k">def</span> <span class="nf">L_x</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:    </span>
+<span class="sd">        j: The total angular momentum quantum number</span>
+<span class="sd">        m: The magnetic quantum number</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:    </span>
+<span class="sd">        If j == None and m == None, the general formula for the L_x operator for spherical harmonics is returned.    </span>
+<span class="sd">        Else, the formula for the L_x operator is computed using Dirac notation</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+        
+    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">m</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+       <span class="n">L_R</span><span class="p">,</span> <span class="n">L_L</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;L_+ L_-&quot;</span><span class="p">)</span>
+       <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">L_R</span> <span class="o">+</span> <span class="n">L_L</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">L_raising_operator</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="n">L_lowering_operator</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span></div>
+    
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Elizabeth Stippel, Lauryn Jerz, Alexey V. Akimov
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

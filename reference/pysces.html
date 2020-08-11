@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pysces &mdash; Pysces 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Pysces Documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Pysces
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pysces</a><ul class="simple">
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Pysces</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>pysces</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reference/pysces.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pysces">
+<h1>pysces<a class="headerlink" href="#pysces" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-pysces"></span><dl class="py function">
+<dt id="pysces.HO">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">HO</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">condition</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#HO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.HO" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>condition</strong> – the condition of the harmonic oscillator. Examples include: “ground_state” or “ladder”.
+This can also be left blank to give the general definition of a harmonic oscillator.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The Harmonic Oscillator Hamiltonian. Note that “p” is the linear momentum operator, and so the
+first term is the kinetic_energy() function mentioned above.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.L_2">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">L_2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">m</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#L_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.L_2" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>j</strong> – The total angular momentum quantum number</p></li>
+<li><p><strong>m</strong> – The magnetic quantum number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The L^2 vector magnitude eigenvalue for spherical harmonics.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bra(str(j), str(“,”), str(m))*j*(j+1)*h_b**2*Ket(str(j), str(“,”), str(m))</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.L_lowering_operator">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">L_lowering_operator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#L_lowering_operator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.L_lowering_operator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>j</strong> – The total angular momentum quantum number</p></li>
+<li><p><strong>m</strong> – The magnetic quantum number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If j == None and m == None, the general formula for the lowering operator for spherical harmonics is returned.
+Else, the formula for the lowering operator is computed using Dirac notation</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bra(str(j), str(“,”), str(m))*h_b*sqrt(j*(j+1)-m*(m-1))*Ket(str(j), str(‘,’), str(m-1))</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.L_raising_operator">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">L_raising_operator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#L_raising_operator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.L_raising_operator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>j</strong> – The total angular momentum quantum number</p></li>
+<li><p><strong>m</strong> – The magnetic quantum number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If j == None and m == None, the general formula for the raising operator for spherical harmonics is returned.
+Else, the formula for the raising operator is computed using Dirac notation</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bra(str(j), str(“,”), str(m))*h_b*sqrt(j*(j+1)-m*(m+1))*Ket(str(j), str(‘,’), str(m+1))</p>
+<div class="math notranslate nohighlight">
+\[\langle j, m | \hbar \sqrt{ j (j+1) - m (m+1) }  | j, m+1 \rangle\]</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.L_x">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">L_x</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#L_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.L_x" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>j</strong> – The total angular momentum quantum number</p></li>
+<li><p><strong>m</strong> – The magnetic quantum number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If j == None and m == None, the general formula for the L_x operator for spherical harmonics is returned.
+Else, the formula for the L_x operator is computed using Dirac notation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.L_z">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">L_z</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">m</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#L_z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.L_z" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>j</strong> – The total angular momentum quantum number</p></li>
+<li><p><strong>m</strong> – The magnetic quantum number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The L_z projection (in the z direction) eigenvalue for spherical harmonics.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bra(str(j), str(“,”), str(m))*m*h_b*Ket(str(j), str(“,”), str(m))</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.PIB">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">PIB</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#PIB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.PIB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>x: a variable.
+L: Length of the box.
+n: an integer.</p>
+<p>Returns:</p>
+<p>The WaveFunction for Particle in a Box with respect to the chosen parameters.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.PIB_normalized">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">PIB_normalized</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#PIB_normalized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.PIB_normalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>x: a variable.
+L: Length of the box.
+n: an integer.</p>
+<p>Returns:</p>
+<p>The normalized WaveFunction for Particle in a Box, with respect to the chosen variables. This answer can also be calculated using the normalize_constant() function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.a_lowering">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">a_lowering</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#a_lowering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.a_lowering" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – this is usually either empty, (no parameter), “normalized” for the normalized ladder operator,</p></li>
+<li><p><strong>a &quot;symbol&quot; for the symbolic representation of the parameter.</strong> (<em>or</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Either the mathematic representation of the “a” lowering operator (commonly used in harmonic oscillator problems),
+the normalized lowering operator (in dirac notation), or the symbol notation of the operator.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.a_raising">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">a_raising</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#a_raising"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.a_raising" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>A: this is usually either empty, (no parameter), “normalized” for the normalized ladder operator, or a “symbol” for the symbolic representation of the parameter.</p>
+<p>Returns:</p>
+<p>Either the mathematic representation of the “a” raising operator (commonly used in harmonic oscillator problems), the normalized raising operator (in dirac notation), or the symbol notation of the operator.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.comm_1">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">comm_1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">commutator_1</span></em>, <em class="sig-param"><span class="n">commutator_2</span></em>, <em class="sig-param"><span class="n">aux</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#comm_1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.comm_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is not used directly, it is only used in the comm() function below.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>commutator_1</strong> – The first operator in the commutator</p></li>
+<li><p><strong>commutator_2</strong> – The second operator in the commutator</p></li>
+<li><p><strong>aux</strong> – The auxiliary function. This is defined below, as F(x).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The commutator of commutator_1 and commutator_2 with respect to the auxiliary function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.comm_steps">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">comm_steps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">commutator_1</span></em>, <em class="sig-param"><span class="n">commutator_2</span></em>, <em class="sig-param"><span class="n">aux</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#comm_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.comm_steps" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>commutator_1</strong> – the first operator</p></li>
+<li><p><strong>commutator_2</strong> – the second operator</p></li>
+<li><p><strong>aux</strong> – the auxiliary function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>comm_steps(comm(A, B) - comm(C, D))) the code will not process this and therefore each individual commutator needs to have its own line.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Three main steps used to solve a commutator. The first is the printed commutator in brackets, the second is the expansion, and the third output will be the answer. Please note that as of now, the code does not understand the addition/subtraction/multiplication/division of commutators, and so if there are multiple commutators in a line (ex</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.conjugate">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">conjugate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#conjugate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.conjugate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>x: The term of interest. This is commonly a WaveFunction.</p>
+<p>Returns:</p>
+<p>The complex conjugate of a WaveFunction. If there are imaginary terms, they get negated, and if there are no imaginary terms, the WaveFunction is not affected.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.expectation_value">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">expectation_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wavefunc_1</span></em>, <em class="sig-param"><span class="n">operator</span></em>, <em class="sig-param"><span class="n">wavefunc_2</span></em>, <em class="sig-param"><span class="n">var</span></em>, <em class="sig-param"><span class="n">lower</span></em>, <em class="sig-param"><span class="n">upper</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#expectation_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.expectation_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes a symbolic expression for an expectation value of an operator <cite>operator</cite>
+with the two wavefunctions: <cite>&lt;WaveFunc_1|operator|WaveFunc_2&gt;</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wavefunc_1</strong> – The “bra” normalized WaveFunction</p></li>
+<li><p><strong>operator</strong> – The operator of interest</p></li>
+<li><p><strong>wavefunc_2</strong> – The “ket” normalized WaveFunction</p></li>
+<li><p><strong>var</strong> – What the integral is taken with respect to</p></li>
+<li><p><strong>lower</strong> – The lower bound of the integral. If bounds are not listed, this is -oo</p></li>
+<li><p><strong>upper</strong> – The upper bound of the integral. If bounds are not listed, this is oo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The expectation value for the given operator and normalized WaveFunction.
+An expectation value is the average value of an operator for a given WaveFunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.expression_replace">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">expression_replace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">var</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#expression_replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.expression_replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is only used within the “comm()” function.</p>
+<p>expression_replace(expr, var)</p>
+<p>Parameters:</p>
+<p>expr: The expanded commutator to be replaced
+var: The variable/parameter with respect to the chosen commutator.</p>
+<p>Returns:</p>
+<p>This replaces the Derivative(1, x) present in the expanded commutator with either Derivative(F(x), x) or Derivative(x*F(x), x).
+Note that the above states “x”, but can be done for x, y, or z variables.
+This will also replace [p_x, x] and similar commutators, which are usually computed when using angular momentum operators or similar operators.
+Note that the “expr” parameter is a str()</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.f">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">f</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#f"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>var: This is what the auxiliary function is with respect to. It should also match the parameters of the other arguments in the comm() function. (example: if one operator is p_operator(y), the auxiliary function should be f(y).</p>
+<p>Returns:</p>
+<p>This is the auxiliary function, commonly used in the comm() function.
+This simply returns “f(x)”, x being with chosen parameter.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.factorization">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">factorization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">var</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#factorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.factorization" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> – the expression of interest</p></li>
+<li><p><strong>var</strong> – the variable of interest. This is most likely going to be the same variable used in the auxiliary function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The simplified commutator. This is only used when both of the operators in the commutator are angular momentum operators.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.fixed_gaussian">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">fixed_gaussian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">alpha</span></em>, <em class="sig-param"><span class="n">x_0</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#fixed_gaussian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.fixed_gaussian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>alpha:alpha parameter of the gaussian
+x_0: x_0 parameter of the gaussian
+p: p parameter of the gaussian</p>
+<p>Returns:</p>
+<p>The moving gaussian wave function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.hamiltonian">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">hamiltonian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#hamiltonian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.hamiltonian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>var: The variable for the given function. This is usually “x”, “y” or “z”.</p>
+<p>Returns:</p>
+<p>The Hamiltonian operator, made up of the kinetic energy operator and the general potential energy operator.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.kinetic_energy">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">kinetic_energy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#kinetic_energy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.kinetic_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>var: The variable in which the derivative is with respect to.</p>
+<p>Returns:</p>
+<p>The kinetic energy operator, with respect to the chosen parameter.</p>
+<p>Note that the “1” in the derivative is a placeholder, which will be replaced.
+If var == None, the general linear operator is printed, with all three positional arguments “x”, “y”, and “z”</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.kronecker">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">kronecker</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">j</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#kronecker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.kronecker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>i: this is usually “i” and the first variable of the kronecker delta.
+j: this is usually given a numerical value, and is the second variable of the kronecker delta.</p>
+<p>Returns:</p>
+<p>This function does not print anything, but instead is used in conjunction with the code found in the kronecker_delta file on:
+<a class="reference external" href="https://github.com/liz-stippell/Pysces">https://github.com/liz-stippell/Pysces</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.laguerre">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">laguerre</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#laguerre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.laguerre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>r: What the equation is with respect to. This is commonly “r” or “x”
+n: The principle Quantum Number</p>
+<p>Returns:</p>
+<p>The Laguerre polynomial. This is commonly used to solve the laguerre_assoc() function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.laguerre_2">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">laguerre_2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#laguerre_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.laguerre_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>r: What the equation is with respect to. This is commonly “r” or “x”
+n: The principle Quantum Number</p>
+<p>Returns:</p>
+<p>The Laguerre polynomial, without simplification and without the derivative computed.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.laguerre_assoc">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">laguerre_assoc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">l</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#laguerre_assoc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.laguerre_assoc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>n: The principle Quantum Number
+l: The angular momentum Quantum Number</p>
+<p>Returns:</p>
+<p>The Laguerre Associated polynomial, commonly used to solve the radial function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.moving_gaussian">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">moving_gaussian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">alpha</span></em>, <em class="sig-param"><span class="n">x_0</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#moving_gaussian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.moving_gaussian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>alpha:alpha parameter of the gaussian
+x_0: x_0 parameter of the gaussian
+p: p parameter of the gaussian</p>
+<p>Returns:</p>
+<p>The moving gaussian wave function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.moving_gaussian_normalized">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">moving_gaussian_normalized</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">alpha</span></em>, <em class="sig-param"><span class="n">gamma</span></em>, <em class="sig-param"><span class="n">x_0</span></em>, <em class="sig-param"><span class="n">p_0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#moving_gaussian_normalized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.moving_gaussian_normalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>alpha: alpha parameter of the normalized gaussian
+gamma: gamma parameter of the normalized gaussian
+x_0: x_0 parameter of the normalized gaussian
+p_0: p_0 parameter of the normalized gaussian</p>
+<p>Returns:</p>
+<p>The normalized gaussian WaveFunction, with respect to the chosen variables.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.normalize_constant">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">normalize_constant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wavefunc</span></em>, <em class="sig-param"><span class="n">var</span></em>, <em class="sig-param"><span class="n">lower</span></em>, <em class="sig-param"><span class="n">upper</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#normalize_constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.normalize_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>wavefunc: The WaveFunction/expression of interest
+var: What the integral is taken with respect to
+lower: The lower bound of the integral. If bounds are not listed, this is -oo
+upper: The upper bound of the integral. If bounds are not listed, this is oo</p>
+<p>Returns:</p>
+<p>The normalization constant, with respect to the given parameters. To find the normalized WaveFunction, the output for normalize_constant() must be multiplied by the original WaveFunction. A normalized WaveFunction indicates that the probability of finding a particle within certain bounds must be equal to one.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.overlap">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">overlap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">WaveFunc_1</span></em>, <em class="sig-param"><span class="n">WaveFunc_2</span></em>, <em class="sig-param"><span class="n">var</span></em>, <em class="sig-param"><span class="n">lower</span></em>, <em class="sig-param"><span class="n">upper</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#overlap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.overlap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes a symbolic expression for an overlap of two functions, <cite>&lt;WaveFunc_1|WaveFunc_2&gt;</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>WaveFunc_1</strong> – The “bra” normalized WaveFunction</p></li>
+<li><p><strong>WaveFunc_2</strong> – The “ket” normalized WaveFunction</p></li>
+<li><p><strong>var</strong> – What the integral is taken with respect to</p></li>
+<li><p><strong>lower</strong> – The lower bound of the integral. If bounds are not listed, this is -oo</p></li>
+<li><p><strong>upper</strong> – The upper bound of the integral. If bounds are not listed, this is oo</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The overlap of the two WaveFunctions of interest over given bounds.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.p_operator">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">p_operator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#p_operator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.p_operator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>var: The variable that the linear momentum operator is with respect to.</p>
+<p>Returns:</p>
+<p>The linear momentum operator, with respect to the parameter.</p>
+<p>Note that the “1” in the derivative is a placeholder, which will be replaced.
+If var == None, the general linear operator is printed, with all three positional arguments “x”, “y”, and “z”</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.planewave">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">planewave</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#planewave"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.planewave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>x: What the function is with respect to.</p>
+<p>Returns:</p>
+<p>The PlaneWave function with respect to the parameter.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.plot_function">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">plot_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">B</span></em>, <em class="sig-param"><span class="n">lower</span></em>, <em class="sig-param"><span class="n">upper</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#plot_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.plot_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>func: The function/Normalized WaveFunction of interest
+B: This is “x” usually (x-axis)
+lower: The lower bound of the x-axis domain (for Particle in a Box, 0)
+upper: The upper bound of the x-axis domain (for Particle in a Box, 1)</p>
+<p>Returns:</p>
+<p>A plotted function of the function/Normalized WaveFunction of interest.</p>
+<p>Note that the cell often has to be run TWICE in order to print the plot/graph.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.simplify_ladder">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">simplify_ladder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#simplify_ladder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.simplify_ladder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>expr: the expression of interest</p>
+<p>Returns:</p>
+<p>The simplified expression, replacing any a_rasing(symbol)**2 with 0, a_lowering(symbol)**2 with 0, and 2*a_raising(symbol)*a_lowering(symbol) with (2*n+1).</p>
+<p>Please note that the code does not “understand” the difference between a_raising(symbol)*a_lowering(symbol) and a_lowering(symbol)*a_raising(symbol) which are mathematically different and produce different outcomes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.spherical">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">spherical</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#spherical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.spherical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>expr: The expression of interest to be changed into spherical coordinates</p>
+<p>Returns:</p>
+<p>The expression of interest, A, in terms of spherical coordinates</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.v">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">v</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#v"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>var: The variable for the given function. This is usually “x”, “y” or “z”.</p>
+<p>Returns:</p>
+<p>The general potential energy operator, v(x)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pysces.x_ladder">
+<code class="sig-prename descclassname">pysces.</code><code class="sig-name descname">x_ladder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysces.html#x_ladder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysces.x_ladder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters:</p>
+<p>At this time, there are no parameters necessary.</p>
+<p>Returns:</p>
+<p>“x” with respect to the “a” raising/lowering operators</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Pysces Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Elizabeth Stippel, Lauryn Jerz, Alexey V. Akimov
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
