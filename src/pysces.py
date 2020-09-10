@@ -128,7 +128,11 @@ def comm_steps(commutator_1, commutator_2, aux):
         aux: the auxiliary function
     
     Returns:    
-        Three main steps used to solve a commutator. The first is the printed commutator in brackets, the second is the expansion, and the third output will be the answer. Please note that as of now, the code does not understand the addition/subtraction/multiplication/division of commutators, and so if there are multiple commutators in a line (ex: comm_steps(comm(A, B) - comm(C, D))) the code will not process this and therefore each individual commutator needs to have its own line.
+        Three main steps used to solve a commutator. The first is the printed commutator in brackets, the second is the expansion, and the 
+        third output will be the answer. Please note that as of now, the code does not understand the 
+        addition/subtraction/multiplication/division of commutators, and so if there are multiple commutators in a line (ex: 
+        comm_steps(comm(A, B) - comm(C, D))) the code will not process this and therefore each individual commutator needs to have its own 
+        line.
         
     """
     
@@ -143,16 +147,15 @@ def comm_steps(commutator_1, commutator_2, aux):
 def p_operator(var = None):
     """
 
-    Parameters:
-
-    var: The variable that the linear momentum operator is with respect to.
+    Args:
+        var: The variable that the linear momentum operator is with respect to.
 
     Returns:
-
-    The linear momentum operator, with respect to the parameter.
- 
-    Note that the "1" in the derivative is a placeholder, which will be replaced.
-    If var == None, the general linear operator is printed, with all three positional arguments "x", "y", and "z"
+        The linear momentum operator, with respect to the parameter.
+    
+    Note:
+        The "1" in the derivative is a placeholder, which will be replaced.
+        If var == None, the general linear operator is printed, with all three positional arguments "x", "y", and "z"
 
     """
     
@@ -168,16 +171,15 @@ def p_operator(var = None):
 def kinetic_energy(var = None):
     """
 
-    Parameters:
-
-    var: The variable in which the derivative is with respect to.
+    Args:
+        var: The variable in which the derivative is with respect to.
 
     Returns:
-
-    The kinetic energy operator, with respect to the chosen parameter. 
-
-    Note that the "1" in the derivative is a placeholder, which will be replaced.
-    If var == None, the general linear operator is printed, with all three positional arguments "x", "y", and "z"
+        The kinetic energy operator, with respect to the chosen parameter. 
+        
+    Note:
+        The "1" in the derivative is a placeholder, which will be replaced.
+        If var == None, the general linear operator is printed, with all three positional arguments "x", "y", and "z"
 
     """
     
@@ -192,13 +194,11 @@ def kinetic_energy(var = None):
 def v(var):
     """
     
-    Parameters:
-    
-    var: The variable for the given function. This is usually "x", "y" or "z".
+    Args:
+        var: The variable for the given function. This is usually "x", "y" or "z".
     
     Returns:
-    
-    The general potential energy operator, v(x)
+        The general potential energy operator, v(x)
     
     """
     
@@ -209,13 +209,11 @@ def v(var):
 def hamiltonian(var):
     """
 
-    Parameters:
+    Args:
+        var: The variable for the given function. This is usually "x", "y" or "z".
     
-    var: The variable for the given function. This is usually "x", "y" or "z".
-    
-    Returns:
-    
-    The Hamiltonian operator, made up of the kinetic energy operator and the general potential energy operator.
+    Returns:    
+        The Hamiltonian operator, made up of the kinetic energy operator and the general potential energy operator.
     
     """
     
@@ -230,17 +228,16 @@ def expression_replace(expr, var):
     
     expression_replace(expr, var)
 
-    Parameters:
-
-    expr: The expanded commutator to be replaced
-    var: The variable/parameter with respect to the chosen commutator.
+    Args:
+        expr: The expanded commutator to be replaced
+        var: The variable/parameter with respect to the chosen commutator.
 
     Returns:
-
-    This replaces the Derivative(1, x) present in the expanded commutator with either Derivative(F(x), x) or Derivative(x*F(x), x).
-    Note that the above states "x", but can be done for x, y, or z variables.
-    This will also replace [p_x, x] and similar commutators, which are usually computed when using angular momentum operators or similar operators.
-    Note that the "expr" parameter is a str()
+        This replaces the Derivative(1, x) present in the expanded commutator with either Derivative(F(x), x) or Derivative(x*F(x), x).
+        
+    Note: 
+        The above states "x", but can be done for x, y, or z variables.
+        The "expr" parameter is a str()
 
 
     """
@@ -268,14 +265,13 @@ def expression_replace(expr, var):
 def f(var):
     """
 
-    Parameters:
-
-    var: This is what the auxiliary function is with respect to. It should also match the parameters of the other arguments in the comm() function. (example: if one operator is p_operator(y), the auxiliary function should be f(y).
+    Args:
+        var: This is what the auxiliary function is with respect to. It should also match the parameters of the other arguments in the 
+        comm() function. (example: if one operator is p_operator(y), the auxiliary function should be f(y).
 
     Returns:
-
-    This is the auxiliary function, commonly used in the comm() function.
-    This simply returns "f(x)", x being with chosen parameter.
+        This is the auxiliary function, commonly used in the comm() function.
+        This simply returns "f(x)", x being with chosen parameter.
 
     """
     
@@ -287,13 +283,11 @@ def f(var):
 def planewave(x):
     """
 
-    Parameters:
-
-    x: What the function is with respect to.
+    Args:
+        x: What the function is with respect to.
 
     Returns:
-
-    The PlaneWave function with respect to the parameter.
+        The PlaneWave function with respect to the parameter.
 
     """
 
@@ -305,15 +299,13 @@ def planewave(x):
 def PIB(x, L, n):
     """
 
-    Parameters:
-
-    x: a variable.
-    L: Length of the box.
-    n: an integer.
+    Args:
+        x: a variable.
+        L: Length of the box.
+        n: an integer.
 
     Returns:
-
-    The WaveFunction for Particle in a Box with respect to the chosen parameters.
+        The WaveFunction for Particle in a Box with respect to the chosen parameters.
 
     """
     
@@ -325,15 +317,14 @@ def PIB(x, L, n):
 def PIB_normalized(x, L, n):
     """
 
-    Parameters:
-
-    x: a variable.
-    L: Length of the box.
-    n: an integer.
+    Args:
+        x: a variable.
+        L: Length of the box.
+        n: an integer.
 
     Returns:
-
-    The normalized WaveFunction for Particle in a Box, with respect to the chosen variables. This answer can also be calculated using the normalize_constant() function.
+        The normalized WaveFunction for Particle in a Box, with respect to the chosen variables. This answer can also be calculated using 
+        the normalize_constant() function.
 
     """
     
@@ -345,15 +336,13 @@ def PIB_normalized(x, L, n):
 def moving_gaussian(alpha, x_0, p):
     """
 
-    Parameters:
-    
-    alpha:alpha parameter of the gaussian
-    x_0: x_0 parameter of the gaussian
-    p: p parameter of the gaussian
+    Args:
+        alpha:alpha parameter of the gaussian
+        x_0: x_0 parameter of the gaussian
+        p: p parameter of the gaussian
     
     Returns:
-    
-    The moving gaussian wave function.
+        The moving gaussian wave function.
     
     """
     
@@ -366,19 +355,17 @@ def moving_gaussian(alpha, x_0, p):
 def fixed_gaussian(alpha, x_0, p):
     """
 
-    Parameters:
-    
-    alpha:alpha parameter of the gaussian
-    x_0: x_0 parameter of the gaussian
-    p: p parameter of the gaussian
+    Args:
+        alpha:alpha parameter of the gaussian
+        x_0: x_0 parameter of the gaussian
+        p: p parameter of the gaussian
     
     Returns:
-    
-    The moving gaussian wave function.
+        The moving gaussian wave function.
     
     """
     
-    alpha, x, x_0, p, h_b = symbols("alpha x x_0 p h_b")
+    alpha, x, p, h_b = symbols("alpha x p h_b")
     return exp(-((alpha/2)*(x-x_0)**2))
 
 
@@ -387,20 +374,18 @@ def fixed_gaussian(alpha, x_0, p):
 def moving_gaussian_normalized(alpha, gamma, x_0, p_0):
     """
 
-    Parameters:
-    
-    alpha: alpha parameter of the normalized gaussian
-    gamma: gamma parameter of the normalized gaussian
-    x_0: x_0 parameter of the normalized gaussian
-    p_0: p_0 parameter of the normalized gaussian
+    Args:
+        alpha: alpha parameter of the normalized gaussian
+        gamma: gamma parameter of the normalized gaussian
+        x_0: x_0 parameter of the normalized gaussian
+        p_0: p_0 parameter of the normalized gaussian
     
     Returns:
-    
-    The normalized gaussian WaveFunction, with respect to the chosen variables.
+        The normalized gaussian WaveFunction, with respect to the chosen variables.
     
     """
     
-    alpha, gamma, x, x_0, p_0, h_b = symbols("alpha gamma x x_0 p_0 h_b")
+    alpha, gamma, x, p_0, h_b = symbols("alpha gamma x p_0 h_b")
     return ((2*alpha)/pi)**(1/4) * exp(-alpha*(x - x_0)**2 + ((I*p_0)/h_b)*(x - x_0) + (I*gamma)/h_b)
 
 
@@ -409,13 +394,12 @@ def moving_gaussian_normalized(alpha, gamma, x_0, p_0):
 def conjugate(expr):
     """
 
-    Parameters:
-
-    x: The term of interest. This is commonly a WaveFunction.
+    Args:
+        x: The term of interest. This is commonly a WaveFunction.
 
     Returns:
-
-    The complex conjugate of a WaveFunction. If there are imaginary terms, they get negated, and if there are no imaginary terms, the WaveFunction is not affected.
+        The complex conjugate of a WaveFunction. If there are imaginary terms, they get negated, and if there are no imaginary terms, the 
+        WaveFunction is not affected.
 
     """
     
@@ -427,16 +411,16 @@ def conjugate(expr):
 def normalize_constant(wavefunc, var, lower, upper):
     """
 
-    Parameters:
-
-    wavefunc: The WaveFunction/expression of interest
-    var: What the integral is taken with respect to
-    lower: The lower bound of the integral. If bounds are not listed, this is -oo
-    upper: The upper bound of the integral. If bounds are not listed, this is oo
+    Args:
+        wavefunc: The WaveFunction/expression of interest
+        var: What the integral is taken with respect to
+        lower: The lower bound of the integral. If bounds are not listed, this is -oo
+        upper: The upper bound of the integral. If bounds are not listed, this is oo
 
     Returns:
-
-    The normalization constant, with respect to the given parameters. To find the normalized WaveFunction, the output for normalize_constant() must be multiplied by the original WaveFunction. A normalized WaveFunction indicates that the probability of finding a particle within certain bounds must be equal to one.
+        The normalization constant, with respect to the given parameters. To find the normalized WaveFunction, the output for 
+        normalize_constant() must be multiplied by the original WaveFunction. A normalized WaveFunction indicates that the probability of 
+        finding a particle within certain bounds must be equal to one.
 
     """
     nreps = 2
@@ -509,18 +493,17 @@ def overlap(WaveFunc_1, WaveFunc_2, var, lower, upper):
 def plot_function(func, B, lower, upper):
     """
 
-    Parameters:
-
-    func: The function/Normalized WaveFunction of interest
-    B: This is "x" usually (x-axis)
-    lower: The lower bound of the x-axis domain (for Particle in a Box, 0)
-    upper: The upper bound of the x-axis domain (for Particle in a Box, 1)
+    Args:
+        func: The function/Normalized WaveFunction of interest
+        B: This is "x" usually (x-axis)
+        lower: The lower bound of the x-axis domain (for Particle in a Box, 0)
+        upper: The upper bound of the x-axis domain (for Particle in a Box, 1)
 
     Returns:
+        A plotted function of the function/Normalized WaveFunction of interest.
 
-    A plotted function of the function/Normalized WaveFunction of interest.
-
-    Note that the cell often has to be run TWICE in order to print the plot/graph.
+    Note:
+        The cell often has to be run TWICE in order to print the plot/graph.
 
 
     """
@@ -533,14 +516,12 @@ def plot_function(func, B, lower, upper):
 def laguerre(r, n):
     """
 
-    Parameters:
-
-    r: What the equation is with respect to. This is commonly "r" or "x"
-    n: The principle Quantum Number
+    Args:
+        r: What the equation is with respect to. This is commonly "r" or "x"
+        n: The principle Quantum Number
 
     Returns:
-
-    The Laguerre polynomial. This is commonly used to solve the laguerre_assoc() function.
+        The Laguerre polynomial. This is commonly used to solve the laguerre_assoc() function.
 
     """
     
@@ -552,14 +533,12 @@ def laguerre(r, n):
 def laguerre_2(r, n):
     """
 
-    Parameters:
-
-    r: What the equation is with respect to. This is commonly "r" or "x"
-    n: The principle Quantum Number
+    Args:
+        r: What the equation is with respect to. This is commonly "r" or "x"
+        n: The principle Quantum Number
 
     Returns:
-
-    The Laguerre polynomial, without simplification and without the derivative computed.
+        The Laguerre polynomial, without simplification and without the derivative computed.
 
     """
     
@@ -571,14 +550,12 @@ def laguerre_2(r, n):
 def laguerre_assoc(n, l):
     """
 
-    Parameters:
-
-    n: The principle Quantum Number
-    l: The angular momentum Quantum Number
+    Args:
+        n: The principle Quantum Number
+        l: The angular momentum Quantum Number
 
     Returns:
-
-    The Laguerre Associated polynomial, commonly used to solve the radial function.
+        The Laguerre Associated polynomial, commonly used to solve the radial function.
 
     """
     
@@ -589,15 +566,13 @@ def laguerre_assoc(n, l):
 def kronecker(i, j):
     """
 
-    Parameters:
-    
-    i: this is usually "i" and the first variable of the kronecker delta.
-    j: this is usually given a numerical value, and is the second variable of the kronecker delta.
+    Args:
+        i: this is usually "i" and the first variable of the kronecker delta.
+        j: this is usually given a numerical value, and is the second variable of the kronecker delta.
     
     Returns:
-    
-    This function does not print anything, but instead is used in conjunction with the code found in the kronecker_delta file on:
-    https://github.com/liz-stippell/Pysces
+        This function does not print anything, but instead is used in conjunction with the code found in the kronecker_delta file on:
+        https://github.com/liz-stippell/Pysces
     
     """
     if i == j:
@@ -613,13 +588,13 @@ def kronecker(i, j):
 def a_raising(A = None):
     """
     
-    Parameters:
-    
-    A: this is usually either empty, (no parameter), "normalized" for the normalized ladder operator, or a "symbol" for the symbolic representation of the parameter.
+    Args:
+        A: this is usually either empty, (no parameter), "normalized" for the normalized ladder operator, or a "symbol" for the symbolic 
+        representation of the parameter.
     
     Returns:
-    
-    Either the mathematic representation of the "a" raising operator (commonly used in harmonic oscillator problems), the normalized raising operator (in dirac notation), or the symbol notation of the operator.
+        Either the mathematic representation of the "a" raising operator (commonly used in harmonic oscillator problems), the normalized 
+        raising operator (in dirac notation), or the symbol notation of the operator.
     
     """
     
@@ -659,13 +634,11 @@ def a_lowering(A = None):
 def x_ladder():
     """
     
-    Parameters:
-    
-    At this time, there are no parameters necessary.
+    Args:
+        At this time, there are no parameters necessary.
     
     Returns:
-    
-    "x" with respect to the "a" raising/lowering operators
+        "x" with respect to the "a" raising/lowering operators
     
     """
     
@@ -678,15 +651,16 @@ def x_ladder():
 def simplify_ladder(expr):
     """
     
-    Parameters:
-    
-    expr: the expression of interest
+    Args:
+        expr: the expression of interest
     
     Returns:
+        The simplified expression, replacing any a_rasing(symbol)**2 with 0, a_lowering(symbol)**2 with 0, and 
+        2*a_raising(symbol)*a_lowering(symbol) with (2*n+1). 
     
-    The simplified expression, replacing any a_rasing(symbol)**2 with 0, a_lowering(symbol)**2 with 0, and 2*a_raising(symbol)*a_lowering(symbol) with (2*n+1). 
-    
-    Please note that the code does not "understand" the difference between a_raising(symbol)*a_lowering(symbol) and a_lowering(symbol)*a_raising(symbol) which are mathematically different and produce different outcomes.
+    Note:
+        The code does not "understand" the difference between a_raising(symbol)*a_lowering(symbol) and a_lowering(symbol)*a_raising(symbol) 
+        which are mathematically different and produce different outcomes.
     
     """
     symbol, n = symbols("symbol n")
@@ -722,13 +696,11 @@ def HO(condition = None):
 def spherical(expr):
     """
 
-    Parameters:
-    
-    expr: The expression of interest to be changed into spherical coordinates
+    Args:
+        expr: The expression of interest to be changed into spherical coordinates
     
     Returns:
-    
-    The expression of interest, A, in terms of spherical coordinates
+        The expression of interest, A, in terms of spherical coordinates
     
     """
     
