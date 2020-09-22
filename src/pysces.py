@@ -112,11 +112,11 @@ def factorization(expr, var):
     
     L_z, L_y, L_x = symbols("L_z, L_y, L_x")
     if var == z:
-        return comm(Operator(z), p_operator(z), f(z))*L_z
+        return comm(Operator(z), lin_mom(z), f(z))*L_z
     if var == y:
-        return comm(Operator(y), p_operator(y), f(y))*L_y
+        return comm(Operator(y), lin_mom(y), f(y))*L_y
     if var == x:
-        return comm(Operator(x), p_operator(x), f(x))*L_x
+        return comm(Operator(x), lin_mom(x), f(x))*L_x
 
         
     
@@ -144,7 +144,7 @@ def comm_steps(commutator_1, commutator_2, aux):
 
 
 
-def p_operator(var = None):
+def lin_mom(var = None):
     """
 
     Args:
@@ -164,7 +164,6 @@ def p_operator(var = None):
         return Operator(-I*h_b*(Derivative("1", x))) + Operator(-I*h_b*(Derivative("1", y))) + Operator(-I*h_b*(Derivative("1", z)))
     else:
         return Operator(-I*h_b*(Derivative("1", var)))
-
 
 
 
@@ -191,7 +190,7 @@ def kinetic_energy(var = None):
 
 
 
-def v(var):
+def potential_energy(var):
     """
     
     Args:
@@ -245,17 +244,17 @@ def expression_replace(expr, var):
     L_x, L_z, L_y, p_x, p_y, p_z, x, y, z = symbols("L_x, L_z, L_y, p_x, p_y, p_z, x, y, z")
     
     if str('[p_x,x]') in str(expr):
-        return sympify(str(sympify(str(expr).replace(str('[p_x,x]'), str(expression_replace(comm(p_operator(var), Operator(var), f(var)), K))))).replace(str(p_y*z - p_z*y), str(-L_x)))
+        return sympify(str(sympify(str(expr).replace(str('[p_x,x]'), str(expression_replace(comm(lin_mom(var), Operator(var), f(var)), K))))).replace(str(p_y*z - p_z*y), str(-L_x)))
     if var == x:
         return sympify(str(expr).replace(str(Derivative(1, var)*f(var)), str(Derivative(f(var), var).doit())).replace(str('Derivative(1, x)*x*f(x)'), str(Derivative(var*f(var), var).doit())))
     
     if str('[p_y, y]') in str(expr):
-        return sympify(str(sympify(str(R).replace(str('[p_y,y]'), str(expression_replace(comm(p_operator(var), Operator(var), f(var)), K))))).replace(str(p_x*z - p_z*x), str(-L_y)))
+        return sympify(str(sympify(str(R).replace(str('[p_y,y]'), str(expression_replace(comm(lin_mom(var), Operator(var), f(var)), K))))).replace(str(p_x*z - p_z*x), str(-L_y)))
     if var == y:
         return sympify(str(expr).replace(str(Derivative(1, var)*f(var)), str(Derivative(f(var), var).doit())).replace(str('Derivative(1, y)*y*f(y)'), str(Derivative(var*f(var), var).doit())))
     
     if str('[p_z,z]') in str(expr):
-        return sympify(str(sympify(str(expr).replace(str('[p_z,z]'), str(expression_replace(comm(p_operator(var), Operator(var), f(var)), K))))).replace(str(p_x*y - p_y*x), str(-L_z)))
+        return sympify(str(sympify(str(expr).replace(str('[p_z,z]'), str(expression_replace(comm(lin_mom(var), Operator(var), f(var)), K))))).replace(str(p_x*y - p_y*x), str(-L_z)))
     elif var == z:
         return sympify(str(expr).replace(str(Derivative(1, var)*f(var)), str(Derivative(f(var), var).doit())).replace(str('Derivative(1, z)*z*f(z)'), str(Derivative(var*f(var), var).doit())))
 
@@ -267,7 +266,7 @@ def f(var):
 
     Args:
         var: This is what the auxiliary function is with respect to. It should also match the parameters of the other arguments in the 
-        comm() function. (example: if one operator is p_operator(y), the auxiliary function should be f(y).
+        comm() function. (example: if one operator is lin_mom(y), the auxiliary function should be f(y).
 
     Returns:
         This is the auxiliary function, commonly used in the comm() function.
@@ -346,7 +345,7 @@ def moving_gaussian(alpha, x_0, p):
     
     """
     
-    alpha, x, x_0, p, h_b = symbols("alpha x x_0 p h_b")
+    alpha, x, p, h_b = symbols("alpha x p h_b")
     return exp(-((alpha/2)*(x-x_0)**2 + (I*p)/h_b*(x-x_0)))
 
 
@@ -461,10 +460,10 @@ def expectation_value(wavefunc_1, operator, wavefunc_2, var, lower, upper):
     
     if operator == kinetic_energy(x):
         return sympify(str(sympify(str(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))).replace(str(Derivative("1", x)**2), str(Derivative(wavefunc_1, x, x)))).doit()).replace(str('sin(pi*n)'), str(0)).replace(str('cos(pi*n)'), str(0)))
-    if operator == p_operator(x):
-        return Integral(conjugate(wavefunc_1)*operator, (var, lower, upper)).replace(Derivative("1", x), Derivative(wavefunc_1, x).doit()) 
+    if operator == lin_mom(x):
+        return simplify(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper)).replace(Derivative("1", x), Derivative(wavefunc_1, x).doit()))
     else:
-        return Integral(conjugate(wavefunc_1)*operator*wavefunc_2, (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)
+        return simplify(Integral(conjugate(wavefunc_1)*operator*wavefunc_2, (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1))
 
 
 
@@ -669,7 +668,7 @@ def simplify_ladder(expr):
 
 
 
-def HO(condition = None):
+def harmonic(condition = None):
     """    
     Args:
         condition: the condition of the harmonic oscillator. Examples include: "ground_state" or "ladder". 
@@ -709,7 +708,7 @@ def spherical(expr):
 
 
 
-def L_2(j, m):
+def ang_mom_2(j, m):
     """
     Args:    
         j: The total angular momentum quantum number
@@ -731,7 +730,7 @@ def L_2(j, m):
 
 
 
-def L_z(j, m):
+def ang_mom_z(j, m):
     """
     Args:    
         j: The total angular momentum quantum number
@@ -753,7 +752,7 @@ def L_z(j, m):
 
 
 
-def L_raising_operator(j = None, m = None):
+def ang_mom_raising(j = None, m = None):
     """
     Args:    
         j: The total angular momentum quantum number
@@ -781,7 +780,7 @@ def L_raising_operator(j = None, m = None):
 
     
 
-def L_lowering_operator(j = None, m = None):
+def ang_mom_lowering(j = None, m = None):
     """
     Args:    
         j: The total angular momentum quantum number
@@ -806,7 +805,7 @@ def L_lowering_operator(j = None, m = None):
 
 
     
-def L_x(j = None, m = None):
+def ang_mom_x(j = None, m = None):
     """
     Args:    
         j: The total angular momentum quantum number
