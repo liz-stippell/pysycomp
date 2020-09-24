@@ -4,12 +4,10 @@
 # In[3]:
 
 
-from sympy import *
-from sympy.physics.quantum import *
-from sympy.abc import *
-from sympy.plotting import *
-from sympy import init_printing
-init_printing() 
+from sympy import Symbol, symbols, Function, init_printing, Integral, Derivative, sympify, sqrt, sin, cos, pi, simplify
+from sympy.physics.quantum import Commutator, Operator, Bra, Ket
+from sympy.plotting import plot
+init_printing()
 
 
 I = sqrt(-1)
@@ -422,18 +420,18 @@ def normalize_constant(wavefunc, var, lower, upper):
         finding a particle within certain bounds must be equal to one.
 
     """
-    nreps = 2
-    initial = [ sin(n*pi), cos(n*pi)]
-    final = [0, 1]
+   # nreps = 2
+   # initial = [ sin(n*pi), cos(n*pi)]
+   # final = [0, 1]
 
-    res = 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit())
+   # res = 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit())
 
-    for i in range(nreps):
-        res = res.replace(initial[i], final[i])
+   # for i in range(nreps):
+   #     res = res.replace(initial[i], final[i])
      
-    return simplify( res )
-    
-    #return simplify( 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)) )
+   # return simplify( res )
+    n = Symbol("n")
+    return simplify( 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)) )
 
 
 
@@ -457,11 +455,11 @@ def expectation_value(wavefunc_1, operator, wavefunc_2, var, lower, upper):
 
     """
     
-    
-    if operator == kinetic_energy(x):
-        return sympify(str(sympify(str(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))).replace(str(Derivative("1", x)**2), str(Derivative(wavefunc_1, x, x)))).doit()).replace(str('sin(pi*n)'), str(0)).replace(str('cos(pi*n)'), str(0)))
-    if operator == lin_mom(x):
-        return simplify(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper)).replace(Derivative("1", x), Derivative(wavefunc_1, x).doit()))
+    n = Symbol("n")
+    if operator == kinetic_energy(var):
+        return sympify(str(sympify(str(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))).replace(str(Derivative("1", var)**2), str(Derivative(wavefunc_1, var, var)))).doit()).replace(str('sin(pi*n)'), str(0)).replace(str('cos(pi*n)'), str(0)))
+    if operator == lin_mom(var):
+        return simplify(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper)).replace(Derivative("1", var), Derivative(wavefunc_1, var).doit()))
     else:
         return simplify(Integral(conjugate(wavefunc_1)*operator*wavefunc_2, (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1))
 
