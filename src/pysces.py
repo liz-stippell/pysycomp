@@ -409,7 +409,7 @@ def conjugate(expr):
 
 
 
-def normalize_constant(wavefunc, var, lower, upper):
+def normalization_constant(wavefunc, var, lower, upper):
     """
 
     Args:
@@ -420,8 +420,8 @@ def normalize_constant(wavefunc, var, lower, upper):
 
     Returns:
         The normalization constant, with respect to the given parameters. To find the normalized WaveFunction, the output for 
-        normalize_constant() must be multiplied by the original WaveFunction. A normalized WaveFunction indicates that the probability of 
-        finding a particle within certain bounds must be equal to one.
+        normalization_constant() must be multiplied by the original WaveFunction. A normalized WaveFunction indicates that the probability 
+        of finding a particle within certain bounds must be equal to one.
 
     """
     nreps = 2
@@ -436,6 +436,26 @@ def normalize_constant(wavefunc, var, lower, upper):
     return simplify( res )
     # n = Symbol("n")
     # return simplify( 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)) )
+
+
+
+
+
+def normalization_constant_steps(wavefunc, var, lower, upper):
+    """
+    
+    Args:
+        wavefunc: The WaveFunction/expression of interest
+        var: What the integral is taken with respect to
+        lower: The lower bound of the integral. If bounds are not listed, this is -oo
+        upper: The upper bound of the integral. If bounds are not listed, this is oo
+    
+    Returns:
+        The steps on how to solve a normalization problem.
+    """
+    return display(1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)))), \
+            display(1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit())), \
+                display(simplify( 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)) ))
 
 
 
@@ -469,6 +489,24 @@ def expectation_value(wavefunc_1, operator, wavefunc_2, var, lower, upper):
 
 
 
+    
+def expectation_value_steps(wavefunc_1, operator, wavefunc_2, var, lower, upper):
+    
+    n = Symbol("n")
+    if operator == kinetic_energy(var):
+        return display(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))), \
+                       display((Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))).replace(str(Derivative("1", var)**2), str(Derivative(wavefunc_1, var, var)))).doit(), \
+                            display(sympify(str(sympify(str(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))).replace(str(Derivative("1", var)**2), str(Derivative(wavefunc_1, var, var)))).doit()).replace(str('sin(pi*n)'), str(0)).replace(str('cos(pi*n)'), str(0))))
+    if operator == lin_mom(var):
+        return display(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))), \
+                       display(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper)).replace(Derivative("1", var), Derivative(wavefunc_1, var).doit())), \
+                           display(simplify(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper)).replace(Derivative("1", var), Derivative(wavefunc_1, var).doit())))
+    else:
+        return display(Integral(conjugate(wavefunc_1)*operator*wavefunc_2, (var, lower, upper))), \
+                       display(simplify(Integral(conjugate(wavefunc_1)*operator*wavefunc_2, (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)))
+    
+    
+    
 
 def overlap(WaveFunc_1, WaveFunc_2, var, lower, upper):
     """
@@ -486,7 +524,7 @@ def overlap(WaveFunc_1, WaveFunc_2, var, lower, upper):
     
     """
     
-    return Integral(WaveFunc_1*WaveFunc_2, (var, lower, upper))
+    return simplify(Integral(WaveFunc_1*WaveFunc_2, (var, lower, upper)).doit()).replace(sin(n*pi), 0).replace(cos(n*pi), 1)
 
 
 
