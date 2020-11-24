@@ -325,11 +325,47 @@ def PIB_normalized(x, L, n):
 
     Returns:
         The normalized WaveFunction for Particle in a Box, with respect to the chosen variables. This answer can also be calculated using 
-        the normalize_constant() function.
+        the normalization_constant() function.
 
     """
     
     return sqrt(2/L)*sin((n*pi*x)/L)
+
+
+
+
+def PIB_2D(x, y, L_x, L_y, n):
+    """
+    
+    Args:
+        x: a variable.
+        y: a variable.
+        L_x: Length of the box in the x direction
+        L_y: Length of the box in the y direction
+        n: an integer.
+    
+    Returns:
+        The WaveFunction for Particle in a Box in two dimensions with respect to the chosen parameters.
+    
+    """
+    return  sin((n*pi*x)/L_x)*sin((n*pi*y)/L_y)
+
+def PIB_2D_normalized(x, y, L_x, L_y, n):
+    """
+    
+    Args:
+        x: a variable.
+        y: a variable.
+        L_x: Length of the box in the x direction
+        L_y: Length of the box in the y direction
+        n: an integer.
+    
+    Returns:
+        The normalized WaveFunction for Particle in a Box, with respect to the chosen variables. This answer at this time cannot be 
+        calculated using the normalization_constant() function.
+    
+    """
+    return sqrt(2/L_x)*sin((n*pi*x)/L_x)*sqrt(2/L_y)*sin((n*pi*y)/L_y)
 
 
 
@@ -409,38 +445,73 @@ def conjugate(expr):
 
 
 
-def normalize_constant(wavefunc, var, lower, upper):
+def normalization_constant(wavefunc, lower, upper, var1, var2 = None):
     """
 
     Args:
         wavefunc: The WaveFunction/expression of interest
-        var: What the integral is taken with respect to
         lower: The lower bound of the integral. If bounds are not listed, this is -oo
         upper: The upper bound of the integral. If bounds are not listed, this is oo
+        var1: What the integral is taken with respect to
+        var2: What the second integral is taken with respect to 
 
     Returns:
         The normalization constant, with respect to the given parameters. To find the normalized WaveFunction, the output for 
-        normalize_constant() must be multiplied by the original WaveFunction. A normalized WaveFunction indicates that the probability of 
-        finding a particle within certain bounds must be equal to one.
+        normalization_constant() must be multiplied by the original WaveFunction. A normalized WaveFunction indicates that the probability 
+        of finding a particle within certain bounds must be equal to one.
+    
+    Note:
+        The double integration only works if they are integrated over the same bounds. 
 
     """
     nreps = 2
     initial = [ sin(n*pi), cos(n*pi)]
     final = [0, 1]
 
-    res = 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit())
+    res = 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var1, lower, upper)).doit())
+
+    if var2 == None:
+        return simplify(res)
+    else:
+        res2 = 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var1, lower, upper), (var2, lower, upper)).doit())
 
     for i in range(nreps):
         res = res.replace(initial[i], final[i])
-     
-    return simplify( res )
+        res2 = res2.replace(initial[i], final[i])
+        return simplify( res2 )
     # n = Symbol("n")
     # return simplify( 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)) )
 
 
 
 
-def expectation_value(wavefunc_1, operator, wavefunc_2, var, lower, upper):
+
+def normalization_constant_steps(wavefunc, lower, upper, var1, var2 = None):
+    """
+    
+    Args:
+        wavefunc: The WaveFunction/expression of interest
+        lower: The lower bound of the integral. If bounds are not listed, this is -oo
+        upper: The upper bound of the integral. If bounds are not listed, this is oo
+        var1: What the (first) integral is taken with respect to
+        var2: What the second integral is taken with respect to (if there are two integrals)
+    
+    Returns:
+        The steps on how to solve a normalization problem.
+    """
+    if var2 == None:
+        return display(1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var1, lower, upper)))), \
+                display(1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var1, lower, upper)).doit())), \
+                    display(simplify( 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var1, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)) ))
+    else:
+        return display(1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var1, lower, upper), (var2, lower, upper)))), \
+                display(1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var1, lower, upper), (var2, lower, upper)).doit())), \
+                    display(simplify( 1/sqrt(Integral(wavefunc*conjugate(wavefunc), (var1, lower, upper), (var2, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)) ))
+    
+
+
+
+def expectation_value(wavefunc_1, operator, wavefunc_2, lower, upper, var):
     """
     Computes a symbolic expression for an expectation value of an operator `operator`
     with the two wavefunctions: `<WaveFunc_1|operator|WaveFunc_2>` 
@@ -449,16 +520,15 @@ def expectation_value(wavefunc_1, operator, wavefunc_2, var, lower, upper):
         wavefunc_1: The "bra" normalized WaveFunction
         operator: The operator of interest
         wavefunc_2: The "ket" normalized WaveFunction
-        var: What the integral is taken with respect to
         lower: The lower bound of the integral. If bounds are not listed, this is -oo
         upper: The upper bound of the integral. If bounds are not listed, this is oo
+        var: What the integral is taken with respect to
     
     Returns:
         The expectation value for the given operator and normalized WaveFunction. 
         An expectation value is the average value of an operator for a given WaveFunction. 
 
     """
-    
     n = Symbol("n")
     if operator == kinetic_energy(var):
         return sympify(str(sympify(str(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))).replace(str(Derivative("1", var)**2), str(Derivative(wavefunc_1, var, var)))).doit()).replace(str('sin(pi*n)'), str(0)).replace(str('cos(pi*n)'), str(0)))
@@ -469,8 +539,43 @@ def expectation_value(wavefunc_1, operator, wavefunc_2, var, lower, upper):
 
 
 
+    
+def expectation_value_steps(wavefunc_1, operator, wavefunc_2, lower, upper, var):
+    """
+    Computes a symbolic expression for an expectation value of an operator `operator`
+    with the two wavefunctions: `<WaveFunc_1|operator|WaveFunc_2>` 
 
-def overlap(WaveFunc_1, WaveFunc_2, var, lower, upper):
+    Args:    
+        wavefunc_1: The "bra" normalized WaveFunction
+        operator: The operator of interest
+        wavefunc_2: The "ket" normalized WaveFunction
+        lower: The lower bound of the integral. If bounds are not listed, this is -oo
+        upper: The upper bound of the integral. If bounds are not listed, this is oo
+        var: What the integral is taken with respect to
+    
+    Returns:
+        The steps on how to solve an expectation value problem.
+        An expectation value is the average value of an operator for a given WaveFunction. 
+
+    """
+    
+    n = Symbol("n")
+    if operator == kinetic_energy(var):
+        return display(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))), \
+                       display((Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))).replace(str(Derivative("1", var)**2), str(Derivative(wavefunc_1, var, var)))).doit(), \
+                            display(sympify(str(sympify(str(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))).replace(str(Derivative("1", var)**2), str(Derivative(wavefunc_1, var, var)))).doit()).replace(str('sin(pi*n)'), str(0)).replace(str('cos(pi*n)'), str(0))))
+    if operator == lin_mom(var):
+        return display(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper))), \
+                       display(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper)).replace(Derivative("1", var), Derivative(wavefunc_1, var).doit())), \
+                           display(simplify(Integral(conjugate(wavefunc_1)*operator, (var, lower, upper)).replace(Derivative("1", var), Derivative(wavefunc_1, var).doit())))
+    else:
+        return display(Integral(conjugate(wavefunc_1)*operator*wavefunc_2, (var, lower, upper))), \
+                       display(simplify(Integral(conjugate(wavefunc_1)*operator*wavefunc_2, (var, lower, upper)).doit().replace(sin(n*pi), 0).replace(cos(n*pi), 1)))
+    
+    
+    
+
+def overlap(WaveFunc_1, WaveFunc_2, lower, upper, var):
     """
     Computes a symbolic expression for an overlap of two functions, `<WaveFunc_1|WaveFunc_2>`
 
@@ -486,7 +591,7 @@ def overlap(WaveFunc_1, WaveFunc_2, var, lower, upper):
     
     """
     
-    return Integral(WaveFunc_1*WaveFunc_2, (var, lower, upper))
+    return simplify(Integral(WaveFunc_1*WaveFunc_2, (var, lower, upper)).doit()).replace(sin(n*pi), 0).replace(cos(n*pi), 1)
 
 
 
