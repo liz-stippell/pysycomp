@@ -6,7 +6,7 @@
 
 from sympy import Symbol, symbols, Function, init_printing, Integral, Derivative, sympify, expand, sqrt, sin, cos, pi, simplify, exp
 from sympy.physics.quantum import Commutator, Operator, Bra, Ket
-from sympy.plotting import plot
+from sympy.plotting import plot, plot3d
 from sympy.abc import *
 from sympy.core import *
 import math
@@ -596,14 +596,17 @@ def overlap(WaveFunc_1, WaveFunc_2, lower, upper, var):
 
 
 
-def plot_function(func, B, lower, upper):
+def plot_function(func, lower1, upper1, B, lower2 = None, upper2 = None, C = None):
     """
 
     Args:
         func: The function/Normalized WaveFunction of interest
-        B: This is "x" usually (x-axis)
-        lower: The lower bound of the x-axis domain (for Particle in a Box, 0)
-        upper: The upper bound of the x-axis domain (for Particle in a Box, 1)
+        lower: The lower bound of the B domain (for Particle in a Box, 0)
+        upper: The upper bound of the B domain (for Particle in a Box, 1)
+        B: This is "x" usually (x-axis) - the domain
+        lower2: The lower bound for the C range (for Particle in a Box, 0)
+        upper2: The upper bound for the C range (for Particle in a Box, 1)
+        C: This is "y" usually (y-axis) - the range
 
     Returns:
         A plotted function of the function/Normalized WaveFunction of interest.
@@ -611,10 +614,12 @@ def plot_function(func, B, lower, upper):
     Note:
         The cell often has to be run TWICE in order to print the plot/graph.
 
-
     """
-        
-    return plot(sympify(str(func)), (B, lower, upper))
+    
+    if C == None and lower2 == None and upper2 == None:
+        return plot(sympify(str(func)), (B, lower1, upper1))
+    else:
+        return plot3d(sympify(str(func)), (B, lower1, upper1), (C, lower2, upper2))
 
 
 
