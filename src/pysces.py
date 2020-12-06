@@ -816,15 +816,20 @@ def spherical(expr):
     """
     
     x, r, theta, phi, y, z = symbols("x r theta phi y z")
-    return expr.replace(x, r*sin(theta)*cos(phi)).replace(y, r*sin(theta)*sin(phi)).replace(z, r*cos(theta))
+    return expr.replace(Derivative(1, x), sin(theta)*cos(phi)*Derivative(1, r) + (1/r)*cos(phi)*cos(theta)*Derivative(1, theta) - (1/r)* \
+                        ((sin(phi)/sin(theta)))*Derivative(1, phi)) \
+            .replace(Derivative(1, y), sin(theta)*sin(phi)*Derivative(1, r) + (1/r)*sin(phi)*cos(theta)*Derivative(1, theta) + (1/r)* \
+                     (cos(phi)/sin(theta))*Derivative(1, phi)) \
+            .replace(Derivative(1, z), cos(theta)*Derivative(1, r) - (1/r)*sin(theta)*Derivative(1, theta)) \
+            .replace(x, r*sin(theta)*cos(phi)).replace(y, r*sin(theta)*sin(phi)).replace(z, r*cos(theta)) 
 
 
 
-def ang_mom_2(j, m):
+def ang_mom_2(ang_mom, mag):
     """
     Args:    
-        j: The total angular momentum quantum number
-        m: The magnetic quantum number
+        ang_mom: The total angular momentum quantum number
+        mag: The magnetic quantum number
     
     Returns:    
         The L^2 vector magnitude eigenvalue for spherical harmonics.
@@ -834,19 +839,21 @@ def ang_mom_2(j, m):
     
     """
     
-    h_b = Symbol("h_b")
-    if (str(j), str(","), str(m)) == (str(j), str(","), str(m)):
-        return j*(j+1)*h_b**2
+    h_b, j, m = symbols("h_b, j, m")
+    if ang_mom == j and mag == m:
+        return Bra(str(j), str(","), str(m))*j*(j+1)*h_b**2*Ket(str(j), str(","), str(m))
+    if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(","), str(mag)):
+        return ang_mom*(ang_mom+1)*h_b**2
     else:
         return 0 
 
 
 
-def ang_mom_z(j, m):
+def ang_mom_z(ang_mom, mag):
     """
     Args:    
-        j: The total angular momentum quantum number
-        m: The magnetic quantum number
+        ang_mom: The total angular momentum quantum number
+        mag: The magnetic quantum number
     
     Returns:    
         The L_z projection (in the z direction) eigenvalue for spherical harmonics.
@@ -856,22 +863,24 @@ def ang_mom_z(j, m):
     
     """
     
-    h_b = Symbol("h_b")
-    if (str(j), str(","), str(m)) == (str(j), str(","), str(m)):
-        return m*h_b
+    h_b, j, m = symbols("h_b, j, m")
+    if ang_mom == j and mag == m:
+        return Bra(str(j), str(","), str(m))*m*h_b*Ket(str(j), str(","), str(m))
+    if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(","), str(mag)):
+        return mag*h_b
     else:
         return 0 
 
 
 
-def ang_mom_raising(j = None, m = None):
+def ang_mom_raising(ang_mom = None, mag = None):
     """
     Args:    
-        j: The total angular momentum quantum number
-        m: The magnetic quantum number
+        ang_mom: The total angular momentum quantum number
+        mag: The magnetic quantum number
     
     Returns:    
-        If j == None and m == None, the general formula for the raising operator for spherical harmonics is returned.    
+        If ang_mom == None and mag == None, the general formula for the raising operator for spherical harmonics is returned.    
         Else, the formula for the raising operator is computed using Dirac notation
     
     Note:
@@ -882,24 +891,26 @@ def ang_mom_raising(j = None, m = None):
         
     """
     
-    L_x, L_y, h_b = symbols("L_x L_y h_b")
-    if j == None and m == None:
+    L_x, L_y, h_b, j, m = symbols("L_x L_y h_b j m")
+    if ang_mom == None and mag == None:
         return Operator(L_x) + I*Operator(L_y)
-    if (str(j), str(","), str(m)) == (str(j), str(','), str(m+1)):
-        return h_b*sqrt(j*(j+1)-m*(m+1))
+    if ang_mom == j and mag == m:
+        return Bra(str(j), str(","), str(m))*h_b*sqrt(j*(j+1)-m*(m+1))*Ket(str(j), str(','), str(m+1))
+    if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(','), str(mag+1)):
+        return h_b*sqrt(ang_mom*(ang_mom+1)-mag*(mag+1))
     else:
         return 0 
 
     
 
-def ang_mom_lowering(j = None, m = None):
+def ang_mom_lowering(ang_mom = None, mag = None):
     """
     Args:    
-        j: The total angular momentum quantum number
-        m: The magnetic quantum number
+        ang_mom: The total angular momentum quantum number
+        mag: The magnetic quantum number
     
     Returns:    
-        If j == None and m == None, the general formula for the lowering operator for spherical harmonics is returned.    
+        If ang_mom == None and mag== None, the general formula for the lowering operator for spherical harmonics is returned.    
         Else, the formula for the lowering operator is computed using Dirac notation
     
     Note:
@@ -908,31 +919,34 @@ def ang_mom_lowering(j = None, m = None):
     """
         
     L_x, L_y, h_b = symbols("L_x L_y h_b")
-    if j == None and m == None:
-       return Operator(L_x) - I*Operator(L_y)
-    if (str(j), str(","), str(m)) == (str(j), str(','), str(m-1)):
-       return h_b*sqrt(j*(j+1)-m*(m-1))
+    if ang_mom == None and mag == None:
+        return Operator(L_x) - I*Operator(L_y)
+    if ang_mom == j and mag == m:
+        return  Bra(str(j), str(","), str(m))*h_b*sqrt(j*(j+1)-m*(m-1))*Ket(str(j), str(','), str(m-1))
+    if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(','), str(mag-1)):
+        return h_b*sqrt(ang_mom*(ang_mom+1)-mag*(mag-1))
     else: 
-       return 0 
+        return 0 
 
 
     
-def ang_mom_x(j = None, m = None):
+def ang_mom_x(ang_mom = None, mag = None):
     """
     Args:    
-        j: The total angular momentum quantum number
-        m: The magnetic quantum number
+        ang_mom: The total angular momentum quantum number
+        mag: The magnetic quantum number
     
     Returns:    
-        If j == None and m == None, the general formula for the L_x operator for spherical harmonics is returned.    
+        If ang_mom == None and mag == None, the general formula for the L_x operator for spherical harmonics is returned.    
         Else, the formula for the L_x operator is computed using Dirac notation
     
     """
         
-    if j == None and m == None:
-       L_R, L_L = symbols("L_+ L_-")
-       return (1/2)*(L_R + L_L)
+    if ang_mom == None and mag == None:
+        L_R, L_L = symbols("L_+ L_-")
+        return (1/2)*(L_R + L_L)
     else:
-       return (1/2)*(L_raising_operator(j, m) + L_lowering_operator(j, m))
+        return (1/2)*(ang_mom_raising(ang_mom, mag) + ang_mom_lowering(ang_mom, mag))
+       
     
 
