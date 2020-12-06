@@ -9,7 +9,7 @@ This is experimental code for quantum mechanics, in order to be used for teachin
 
 The Pysces library created uses Sympy and Matplotlib libraries as a backend. This library is still in progress.
 
-Note that the "finalized" folder contains foundations of quantum mechanics such as:
+Note that the "Tutorials" folder contains foundations of quantum mechanics such as:
 
 Commutators
 
@@ -21,16 +21,13 @@ Expectation Values
 
 Plotting Particle in a Box
 
-Computing Laguerre, Laguerre Associated Polynomials
+Introduction to Spherical Harmonics
 
 ___________________________________________________________________________________________________________________________________
 
 Some of the other areas of interest are:
 
 Spherical Harmonics, Harmonic Oscillators, Anharmonic Oscillators, Perturbation Theory
-
-Ladder Operators
-
 ___________________________________________________________________________________________________________________________________
 
 Some areas of higher level research for implementing the code can be found in the following files, and are not intended for teaching purposes:
@@ -38,6 +35,8 @@ Some areas of higher level research for implementing the code can be found in th
 heisenberg_EOM    (Heisenberg Equation of Motion - in progress)
 
 gaussian_wavepackets (Gaussian Wave Packets - in progress)
+
+matrices (Spin Adapted Slater Determinants - in progress)
 
 ___________________________________________________________________________________________________________________________________
 
