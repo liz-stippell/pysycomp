@@ -146,26 +146,63 @@ def comm_steps(commutator_1, commutator_2, aux):
 
 
 
-def lin_mom(var = None):
+def X(expr, n=1):
     """
-
+    
     Args:
-        var: The variable that the linear momentum operator is with respect to.
-
+        expr: The expression of interest
+        n: Variable to call a different output when higher powers are used
+        
     Returns:
-        The linear momentum operator, with respect to the parameter.
-    
-    Note:
-        The "1" in the derivative is a placeholder, which will be replaced.
-        If var == None, the general linear operator is printed, with all three positional arguments "x", "y", and "z"
+        The operator x
+    """
+    x = symbols("x")
+    if n==1:
+        return simplify(x*expr)
+    else:
+        return simplify(x*X(expr, n-1))
 
+    
+    
+def lin_mom(expr, x, n=1):
     """
     
-    h_b, m = symbols("h_b m")
-    if var == None:
-        return Operator(-I*h_b*(Derivative("1", x))) + Operator(-I*h_b*(Derivative("1", y))) + Operator(-I*h_b*(Derivative("1", z)))
+    Args:
+        expr: The expression of interest
+        n: Variable to call a different output when higher powers are used
+    
+    Returns:
+        The linear momentum (p) operator for a selected variable (x, y, etc.)
+    """
+    i = sqrt(-1)
+    x, h_b = symbols("x, h_b")
+    if n==1:
+        return simplify( -i*h_b*Derivative(expr, x))
     else:
-        return Operator(-I*h_b*(Derivative("1", var)))
+        return simplify( -i*h_b*Derivative( lin_mom(expr, n-1), x))  
+
+
+
+#def lin_mom(var = None):
+#    """
+#
+#    Args:
+#        var: The variable that the linear momentum operator is with respect to.
+#
+#    Returns:
+#        The linear momentum operator, with respect to the parameter.
+#    
+#    Note:
+#        The "1" in the derivative is a placeholder, which will be replaced.
+#        If var == None, the general linear operator is printed, with all three positional arguments "x", "y", and "z"
+#
+#    """
+#    
+#    h_b, m = symbols("h_b m")
+#    if var == None:
+#        return Operator(-I*h_b*(Derivative("1", x))) + Operator(-I*h_b*(Derivative("1", y))) + Operator(-I*h_b*(Derivative("1", z)))
+#    else:
+#        return Operator(-I*h_b*(Derivative("1", var)))
 
 
 
@@ -636,9 +673,11 @@ def plot_function(func, lower1, upper1, B, lower2 = None, upper2 = None, C = Non
     """
     
     if C == None and lower2 == None and upper2 == None:
-        return plot(sympify(str(func)), (B, lower1, upper1))
+        plt = plot(sympify(str(func)), (B, lower1, upper1))
+        return plt.show()
     else:
-        return plot3d(sympify(str(func)), (B, lower1, upper1), (C, lower2, upper2))
+        plt = plot3d(sympify(str(func)), (B, lower1, upper1), (C, lower2, upper2))
+        return plt.show()
 
 
 
