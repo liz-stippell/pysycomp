@@ -428,6 +428,25 @@ def moving_gaussian_normalized(alpha, gamma, x_0, p_0):
 
 
 
+def fixed_gaussian_normalized(alpha, x_0, p):
+    """
+
+    Args:
+        alpha:alpha parameter of the gaussian
+        x_0: x_0 parameter of the gaussian
+        p: p parameter of the gaussian
+    
+    Returns:
+        The moving gaussian wave function.
+    
+    """
+    
+    alpha, x, p, h_b = symbols("alpha x p h_b")
+    return (alpha/pi)**(1/4)*exp(-((alpha/2)*(x-x_0)**2))
+
+
+
+
 def conjugate(expr):
     """
 
