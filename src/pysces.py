@@ -149,9 +149,7 @@ def comm_steps(commutator_1, commutator_2, aux):
     
     return display(Commutator(Operator(commutator_1), Operator(commutator_2))*aux),\
                     display(comm_1(Operator(commutator_1), Operator(commutator_2), aux)),\
-                            display(expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), sympify(str('x'))) \
-                            or expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), sympify(str('y'))) \
-                            or expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), sympify(str('z'))) )
+                            display(expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), find_variable(aux)))
 
 
 
