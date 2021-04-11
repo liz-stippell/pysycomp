@@ -1,1 +1,9 @@
 _build*
+developments/.ipynb_checkpoints/derivative_notation-checkpoint.ipynb
+developments/.ipynb_checkpoints/harmonic_oscillators-checkpoint.ipynb
+developments/.ipynb_checkpoints/matrices-checkpoint.ipynb
+developments/.ipynb_checkpoints/spin_adapted_slater_determinants-checkpoint.ipynb
+*.pyc
+developments/derivative_notation.ipynb
+src/.ipynb_checkpoints/Untitled-checkpoint.ipynb
+Tutorials/Untitled.ipynb
