@@ -177,8 +177,8 @@ def lin_mom(x, exp = 1):
     """
     
     Args:
-        expr: The expression of interest
-        n: Variable to call a different output when higher powers are used
+        x: The variable in which the linear momentum operator is with respect to
+        exp: The exponent of the linear momentum operator
     
     Returns:
         The linear momentum (p) operator for a selected variable (x, y, etc.)
