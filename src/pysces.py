@@ -15,6 +15,15 @@ init_printing()
 
 
 I = sqrt(-1)
+h_b = Symbol("hbar")
+
+
+
+def find_variable(aux):
+    aux = str(aux)
+    new = aux.find("(")
+    return sympify(aux[new:])
+
 
 
 def comm_1(commutator_1, commutator_2, aux):
@@ -96,7 +105,7 @@ def comm(commutator_1, commutator_2, aux):
         x, p_y, y, p_x, z, p_z, L_z, L_y, L_x = symbols("x, p_y, y, p_x, z, p_z, L_z, L_y, L_x")
         return (Commutator(Operator(commutator_1), Operator(y*p_z))*aux - Commutator(Operator(commutator_1), Operator(z*p_y))*aux)
     else:
-        return (expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), sympify(str('x'))) or expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), sympify(str('y'))) or expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), sympify(str('z')))) 
+        return (expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), find_variable(aux)))
     
     
     
@@ -140,32 +149,66 @@ def comm_steps(commutator_1, commutator_2, aux):
     
     return display(Commutator(Operator(commutator_1), Operator(commutator_2))*aux),\
                     display(comm_1(Operator(commutator_1), Operator(commutator_2), aux)),\
-                            display(expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), sympify(str('x'))) \
-                            or expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), sympify(str('y'))) \
-                            or expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), sympify(str('z'))) )
+                            display(expression_replace(comm_1(Operator(commutator_1), Operator(commutator_2), aux), find_variable(aux)))
 
 
 
-def lin_mom(var = None):
+#def X(expr, n=1):
+#    """
+#    
+#    Args:
+#        expr: The expression of interest
+#        n: Variable to call a different output when higher powers are used
+#        
+#    Returns:
+#        The operator x
+#    """
+#    x = Symbol("x")
+#    if n==1:
+#        return simplify(x*expr)
+#    else:
+#        return simplify(x*X(expr, n-1))
+
+    
+    
+def lin_mom(x, exp = 1):
     """
-
+    
     Args:
-        var: The variable that the linear momentum operator is with respect to.
-
-    Returns:
-        The linear momentum operator, with respect to the parameter.
+        x: The variable in which the linear momentum operator is with respect to
+        exp: The exponent of the linear momentum operator
     
-    Note:
-        The "1" in the derivative is a placeholder, which will be replaced.
-        If var == None, the general linear operator is printed, with all three positional arguments "x", "y", and "z"
-
+    Returns:
+        The linear momentum (p) operator for a selected variable (x, y, etc.)
     """
     
-    h_b, m = symbols("h_b m")
-    if var == None:
-        return Operator(-I*h_b*(Derivative("1", x))) + Operator(-I*h_b*(Derivative("1", y))) + Operator(-I*h_b*(Derivative("1", z)))
+    if exp == 1:
+        return (-i*h_b*Derivative("1", x))
     else:
-        return Operator(-I*h_b*(Derivative("1", var)))
+        return (-i*h_b*Derivative( lin_mom(x, exp - 1), x))
+
+
+
+#def lin_mom(var = None):
+#    """
+#
+#    Args:
+#        var: The variable that the linear momentum operator is with respect to.
+#
+#    Returns:
+#        The linear momentum operator, with respect to the parameter.
+#    
+#    Note:
+#        The "1" in the derivative is a placeholder, which will be replaced.
+#        If var == None, the general linear operator is printed, with all three positional arguments "x", "y", and "z"
+#
+#    """
+#    
+#    h_b, m = symbols("h_b m")
+#    if var == None:
+#        return Operator(-I*h_b*(Derivative("1", x))) + Operator(-I*h_b*(Derivative("1", y))) + Operator(-I*h_b*(Derivative("1", z)))
+#    else:
+#        return Operator(-I*h_b*(Derivative("1", var)))
 
 
 
@@ -184,7 +227,7 @@ def kinetic_energy(var = None):
 
     """
     
-    h_b, m = symbols("h_b m")
+    m = Symbol("m")
     if var == None:
         return (Operator((-I*h_b*(Derivative("1", x)))**2)*(1/(2*m))) + (Operator((-I*h_b*(Derivative("1", y)))**2)*(1/(2*m))) + (Operator((-I*h_b*(Derivative("1", z)))**2)*(1/(2*m)))
     else:
@@ -247,19 +290,51 @@ def expression_replace(expr, var):
     
     if str('[p_x,x]') in str(expr):
         return sympify(str(sympify(str(expr).replace(str('[p_x,x]'), str(expression_replace(comm(lin_mom(var), Operator(var), f(var)), K))))).replace(str(p_y*z - p_z*y), str(-L_x)))
-    if var == x:
-        return sympify(str(expr).replace(str(Derivative(1, var)*f(var)), str(Derivative(f(var), var).doit())).replace(str('Derivative(1, x)*x*f(x)'), str(Derivative(var*f(var), var).doit())))
     
     if str('[p_y, y]') in str(expr):
-        return sympify(str(sympify(str(R).replace(str('[p_y,y]'), str(expression_replace(comm(lin_mom(var), Operator(var), f(var)), K))))).replace(str(p_x*z - p_z*x), str(-L_y)))
-    if var == y:
-        return sympify(str(expr).replace(str(Derivative(1, var)*f(var)), str(Derivative(f(var), var).doit())).replace(str('Derivative(1, y)*y*f(y)'), str(Derivative(var*f(var), var).doit())))
+        return sympify(str(sympify(str(R).replace(str('[p_y,y]'), str(expression_replace(comm(lin_mom(var), Operator(var), f(var)), K))))).replace(str(p_x*z - p_z*x), str(-L_y))) 
     
     if str('[p_z,z]') in str(expr):
         return sympify(str(sympify(str(expr).replace(str('[p_z,z]'), str(expression_replace(comm(lin_mom(var), Operator(var), f(var)), K))))).replace(str(p_x*y - p_y*x), str(-L_z)))
-    elif var == z:
-        return sympify(str(expr).replace(str(Derivative(1, var)*f(var)), str(Derivative(f(var), var).doit())).replace(str('Derivative(1, z)*z*f(z)'), str(Derivative(var*f(var), var).doit())))
+    
+    else:
+        
+        expr = str(expr)
+        
+        starting_pos = expr.find(f"Derivative(1, {var})")
+        second = expr[starting_pos + 17:].find(f"Derivative(1, {var})")
 
+
+        w = expr[starting_pos + 17:].find(f"f({var})")
+        wn = starting_pos + 17 + w + len(f"f({var})")
+        f = expr[starting_pos + second + len(f"Derivative(1, {var})")*2:].find(f"f({var})")
+        fn = starting_pos + second + len(f"Derivative(1, {var})")*2 + f + len(f"f({var})")
+
+        k = f"Derivative(1, {var}), {var})"
+
+        if k in expr:
+            term1 = expr[starting_pos + 21:wn]
+            term2 = expr[starting_pos + second + 17 + 21:fn]
+            one = f"Derivative({term1}, {var}), {var})"
+            two = f"Derivative({term2}, {var}), {var})"
+
+        else:
+            term1 = expr[starting_pos + len(f"Derivative(1, {var})") + 1:wn]
+            if len(f"{var}") == 1:
+                term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 + 2:fn]
+            if len(f"{var}") == 2:
+                term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 + 1:fn]
+            if len(f"{var}") == 3:
+                term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 :fn]
+
+            one = f"Derivative({term1}, {var})"
+            two = f"Derivative({term2}, {var})"
+
+        x1 = expr.replace(expr[starting_pos + second + 17: fn], two).replace(expr[starting_pos: wn], one)
+        x2 = sympify(x1).doit()
+        x3 = simplify(x2.replace(i**2, -1))
+    
+        return x3
 
 
 
@@ -424,6 +499,25 @@ def moving_gaussian_normalized(alpha, gamma, x_0, p_0):
     
     alpha, gamma, x, p_0, h_b = symbols("alpha gamma x p_0 h_b")
     return ((2*alpha)/pi)**(1/4) * exp(-alpha*(x - x_0)**2 + ((I*p_0)/h_b)*(x - x_0) + (I*gamma)/h_b)
+
+
+
+
+def fixed_gaussian_normalized(alpha, x_0, p):
+    """
+
+    Args:
+        alpha:alpha parameter of the gaussian
+        x_0: x_0 parameter of the gaussian
+        p: p parameter of the gaussian
+    
+    Returns:
+        The moving gaussian wave function.
+    
+    """
+    
+    alpha, x, p, h_b = symbols("alpha x p h_b")
+    return (alpha/pi)**(1/4)*exp(-((alpha/2)*(x-x_0)**2))
 
 
 
@@ -617,9 +711,10 @@ def plot_function(func, lower1, upper1, B, lower2 = None, upper2 = None, C = Non
     """
     
     if C == None and lower2 == None and upper2 == None:
-        return plot(sympify(str(func)), (B, lower1, upper1))
+        plt = plot(sympify(str(func)), (B, lower1, upper1))
     else:
-        return plot3d(sympify(str(func)), (B, lower1, upper1), (C, lower2, upper2))
+        plt = plot3d(sympify(str(func)), (B, lower1, upper1), (C, lower2, upper2))
+    return plt
 
 
 
@@ -709,7 +804,7 @@ def a_raising(A = None):
     
     """
     
-    h_b, m, omega, p, x, a_R, normalized, n, symbol = symbols("h_b m omega p x a_+ normalized n symbol")
+    m, omega, p, x, a_R, normalized, n, symbol = symbols("m omega p x a_+ normalized n symbol")
     if A == None:
         return (1/sqrt(2*h_b*m*omega)*(-I*p + m*omega*x))
     if A == normalized:
@@ -732,7 +827,7 @@ def a_lowering(A = None):
     
     """
     
-    h_b, m, omega, p, x, a_L, normalized, n, symbol = symbols("h_b m omega p x a_- normalized n symbol")
+    m, omega, p, x, a_L, normalized, n, symbol = symbols("m omega p x a_- normalized n symbol")
     if A == None:
         return (1/sqrt(2*h_b*m*omega)*(I*p + m*omega*x)) 
     if A == normalized:
@@ -753,7 +848,7 @@ def x_ladder():
     
     """
     
-    h_b, m, omega, symbol = symbols("h_b m omega symbol")
+    m, omega, symbol = symbols("m omega symbol")
     return (sqrt(h_b/(2*m*omega))*(a_raising(symbol)+a_lowering(symbol)))
 
 
@@ -792,7 +887,7 @@ def harmonic(condition = None):
 
     """
     
-    p, k, m, x, alpha, omega, h_b, ladder, ground_state, symbol = symbols("p k m x alpha omega h_b ladder ground_state symbol")
+    p, k, m, x, alpha, omega, ladder, ground_state, symbol = symbols("p k m x alpha omega ladder ground_state symbol")
     if condition == None:
         return (p**2)/(2*m) + (1/2)*k*(x**2)
     if condition == ladder:
@@ -839,7 +934,7 @@ def ang_mom_2(ang_mom, mag):
     
     """
     
-    h_b, j, m = symbols("h_b, j, m")
+    j, m = symbols("j, m")
     if ang_mom == j and mag == m:
         return Bra(str(j), str(","), str(m))*j*(j+1)*h_b**2*Ket(str(j), str(","), str(m))
     if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(","), str(mag)):
@@ -863,7 +958,7 @@ def ang_mom_z(ang_mom, mag):
     
     """
     
-    h_b, j, m = symbols("h_b, j, m")
+    j, m = symbols("j, m")
     if ang_mom == j and mag == m:
         return Bra(str(j), str(","), str(m))*m*h_b*Ket(str(j), str(","), str(m))
     if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(","), str(mag)):
@@ -891,7 +986,7 @@ def ang_mom_raising(ang_mom = None, mag = None):
         
     """
     
-    L_x, L_y, h_b, j, m = symbols("L_x L_y h_b j m")
+    L_x, L_y, j, m = symbols("L_x L_y j m")
     if ang_mom == None and mag == None:
         return Operator(L_x) + I*Operator(L_y)
     if ang_mom == j and mag == m:
@@ -918,7 +1013,7 @@ def ang_mom_lowering(ang_mom = None, mag = None):
     
     """
         
-    L_x, L_y, h_b = symbols("L_x L_y h_b")
+    L_x, L_y= symbols("L_x L_y")
     if ang_mom == None and mag == None:
         return Operator(L_x) - I*Operator(L_y)
     if ang_mom == j and mag == m:
