@@ -1,13 +1,20 @@
-# Pysces
+# PySyComp
 
-This is experimental code for quantum mechanics, in order to be used for teaching purpose.
+[![Build Status](https://travis-ci.org/Quantum-Dynamics-Hub/pysces.svg?branch=master)](https://travis-ci.org/Quantum-Dynamics-Hub/pysces)
 
-The Pysces library created uses [Sympy](https://github.com/sympy/sympy) and [Matplotlib](https://github.com/matplotlib/matplotlib) libraries as a backend. This library is still in progress.
 
 ## Installation
 
 1. Please make sure both Sympy and Matplotlib are installed, using the links above. 
 2. Git clone this repository into the desired location.
+
+## Documentation
+
+The documentation is available [here](https://quantum-dynamics-hub.github.io/pysces/index.html)
+
+This is experimental code for quantum mechanics, in order to be used for teaching purpose.
+
+The PySyComp library created uses [Sympy](https://github.com/sympy/sympy) and [Matplotlib](https://github.com/matplotlib/matplotlib) libraries as a backend. This library is still in progress.
 
 ## Contents
 
@@ -44,14 +51,6 @@ gaussian_wavepackets (Gaussian Wave Packets - in progress)
 ___________________________________________________________________________________________________________________________________
 
 =======
-# Pysces
-
-[![Build Status](https://travis-ci.org/Quantum-Dynamics-Hub/pysces.svg?branch=master)](https://travis-ci.org/Quantum-Dynamics-Hub/pysces)
-
-
-## Documentation
-
-The documentation is available [here](https://quantum-dynamics-hub.github.io/pysces/index.html)
 
 
 ## Authors
