@@ -5,7 +5,7 @@
 
 ## Installation
 
-1. Please make sure both Sympy and Matplotlib are installed, using the links above. 
+1. Please make sure both Sympy and Matplotlib are installed, using the links in the "Documentation" section. 
 2. Git clone this repository into the desired location.
 
 ## Documentation
