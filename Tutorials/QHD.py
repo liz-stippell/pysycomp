@@ -6,7 +6,7 @@ import sys
 # adding Folder_2 to the system path
 sys.path.insert(0, '../src')
 
-from pysces import lin_mom
+from pysycomp import lin_mom
 from sympy import Symbol, symbols, Function, init_printing, Integral, Derivative, sympify, expand, sqrt, sin, cos, pi, simplify, exp
 from sympy.physics.quantum import Commutator, Operator, Bra, Ket
 from sympy.plotting import plot, plot3d
@@ -20,6 +20,15 @@ hbar = Symbol("hbar")
 
 
 def ham(p, q):
+    """
+    Args:
+        p: The variable for the given function. This is the momentum operator.
+        q: The variable for the given function. This is the position operator.
+    
+    Returns:    
+        The Hamiltonian operator, made up of the kinetic energy operator and the general potential energy operator.
+    
+    """
     p, q, v, mass = symbols("p q v mass")
     v = Function("v")
     return Operator(lin_mom(q, 2)/(2*mass)) + Operator(v(q))
@@ -34,9 +43,26 @@ def QHD_int(n, order, dt):
         return N(sympify(str(n**order + time_deriv(n, order)*dt).replace("hbar*i", "1").replace("I", "1").replace("f(q)", "1").replace("hbar**2*i**2*Derivative(1, q)", "p").replace("hbar**2*i**2", "1")))
 
 def QHD_kinetic(var = None):
+    """
+    
+    Args:
+        var: This is equal to None
+        
+    Returns:
+        The QHD kinetic energy
+    """
     return QHD_int(p, 2)/(2*m)   
     
 def time_deriv1(var, order = 1):
+    """
+    Args:
+        var: The variable of interest to take the time derivative of. For example, the position or momentum operator.
+        order: The order of the variable of interest. The default value is 1
+        
+    Returns:
+        The time derivative of the variable of interest to the desired order.
+    
+    """
     pq_s = Symbol("pq_s")
     aux = Operator(Function("f")(q))
     pq_s = (Operator(p)*Operator(q)+Operator(q)*Operator(p))/2
@@ -176,9 +202,21 @@ def time_deriv1(var, order = 1):
 
 
 def time_deriv(var, order = 1):
+    """
+    
+    The second step in computing the time derivative. Simplifies the time_deriv1 function.
+    
+    """
     return time_deriv1(var, order)#/(i*hbar)
 
 def symmetrize(expr):
+    """
+    Args:
+        expr: The expression of interest.
+        
+    Returns:
+        The symmetrized version of the expression of interest.
+    """
     p, x2, x, px, xp = symbols("p, x2, x, px, xp")
     expr1 = str(expr)
     expr1 = expr1.replace("p*x2", "(x2*p-2*x*x*p+2*x*px)").replace("p*x", "xp").replace("px", "xp")
