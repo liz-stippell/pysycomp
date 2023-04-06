@@ -14,7 +14,7 @@
 #
 import os
 import sys
-#sys.path.insert(0, os.path.abspath('../../../cookbook'))
+sys.path.insert(0, os.path.abspath('../../../src/'))
 #sys.path.insert(0, os.path.abspath('../../../notebooks'))
 
 
@@ -49,7 +49,6 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.autosummary',
     'sphinx.ext.extlinks',
-    'recommonmark'
 ]
 
 
@@ -104,7 +103,8 @@ pygments_style = 'default'
 # a list of builtin themes.
 #
 #html_theme = 'alabaster'
-html_theme = 'sphinx_rtd_theme'
+#html_theme = 'sphinx_rtd_theme'
+html_theme = 'classic'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

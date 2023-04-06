@@ -1,2 +1,2 @@
-__all__ = ["pysces",
+__all__ = ["pysycomp",
           ]

@@ -1,9 +1,9 @@
-pysces
+pysycomp
 **************************
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: pysces
+.. automodule:: pysycomp
    :members:

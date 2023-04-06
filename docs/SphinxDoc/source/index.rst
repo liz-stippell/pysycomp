@@ -9,7 +9,7 @@ Pysces Documentation
    :maxdepth: 2
    :caption: Contents:
 
-   reference/pysces   
+   reference/pysycomp
 
 
 Indices and tables
