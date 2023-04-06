@@ -15,7 +15,7 @@ init_printing()
 
 
 I = sqrt(-1)
-h_b = Symbol("hbar")
+hbar = Symbol("hbar")
 
 
 
@@ -183,9 +183,9 @@ def lin_mom(x, exp = 1):
     """
     
     if exp == 1:
-        return (-i*h_b*Derivative("1", x))
+        return (-i*hbar*Derivative("1", x))
     else:
-        return (-i*h_b*Derivative( lin_mom(x, exp - 1), x))
+        return (-i*hbar*Derivative( lin_mom(x, exp - 1), x))
 
 
 
@@ -227,11 +227,11 @@ def kinetic_energy(var = None):
 
     """
     
-    m = Symbol("m")
+#    m = Symbol("m")
     if var == None:
-        return (Operator((-I*h_b*(Derivative("1", x)))**2)*(1/(2*m))) + (Operator((-I*h_b*(Derivative("1", y)))**2)*(1/(2*m))) + (Operator((-I*h_b*(Derivative("1", z)))**2)*(1/(2*m)))
+        return (Operator((-I*hbar*(Derivative("1", x)))**2)*(1/(2*m))) + (Operator((-I*hbar*(Derivative("1", y)))**2)*(1/(2*m))) + (Operator((-I*hbar*(Derivative("1", z)))**2)*(1/(2*m)))
     else:
-        return (Operator((-I*h_b*(Derivative("1", var)))**2)*(1/(2*m)))
+        return (Operator((-I*hbar*(Derivative("1", var)))**2)*(1/(2*m)))
 
 
 
@@ -458,8 +458,8 @@ def moving_gaussian(alpha, x_0, p):
     
     """
     
-    alpha, x, p, h_b = symbols("alpha x p h_b")
-    return exp(-((alpha/2)*(x-x_0)**2 + (I*p)/h_b*(x-x_0)))
+    alpha, x, p, hbar = symbols("alpha x p hbar")
+    return exp(-((alpha/2)*(x-x_0)**2 + (I*p)/hbar*(x-x_0)))
 
 
 
@@ -477,7 +477,7 @@ def fixed_gaussian(alpha, x_0, p):
     
     """
     
-    alpha, x, p, h_b = symbols("alpha x p h_b")
+    alpha, x = symbols("alpha x")
     return exp(-((alpha/2)*(x-x_0)**2))
 
 
@@ -497,8 +497,8 @@ def moving_gaussian_normalized(alpha, gamma, x_0, p_0):
     
     """
     
-    alpha, gamma, x, p_0, h_b = symbols("alpha gamma x p_0 h_b")
-    return ((2*alpha)/pi)**(1/4) * exp(-alpha*(x - x_0)**2 + ((I*p_0)/h_b)*(x - x_0) + (I*gamma)/h_b)
+    alpha, gamma, x, p_0, hbar = symbols("alpha gamma x p_0 hbar")
+    return ((2*alpha)/pi)**(1/4) * exp(-alpha*(x - x_0)**2 + ((I*p_0)/hbar)*(x - x_0) + (I*gamma)/hbar)
 
 
 
@@ -516,7 +516,7 @@ def fixed_gaussian_normalized(alpha, x_0, p):
     
     """
     
-    alpha, x, p, h_b = symbols("alpha x p h_b")
+    alpha, x = symbols("alpha x")
     return (alpha/pi)**(1/4)*exp(-((alpha/2)*(x-x_0)**2))
 
 
@@ -806,7 +806,7 @@ def a_raising(A = None):
     
     m, omega, p, x, a_R, normalized, n, symbol = symbols("m omega p x a_+ normalized n symbol")
     if A == None:
-        return (1/sqrt(2*h_b*m*omega)*(-I*p + m*omega*x))
+        return (1/sqrt(2*hbar*m*omega)*(-I*p + m*omega*x))
     if A == normalized:
         return Bra(str(n))*sqrt(n+1)*Ket(str(n+1))
     if A == symbol:
@@ -829,7 +829,7 @@ def a_lowering(A = None):
     
     m, omega, p, x, a_L, normalized, n, symbol = symbols("m omega p x a_- normalized n symbol")
     if A == None:
-        return (1/sqrt(2*h_b*m*omega)*(I*p + m*omega*x)) 
+        return (1/sqrt(2*hbar*m*omega)*(I*p + m*omega*x)) 
     if A == normalized:
         return Bra(n)*sqrt(n)*Ket(n-1)
     if A == symbol:
@@ -849,7 +849,7 @@ def x_ladder():
     """
     
     m, omega, symbol = symbols("m omega symbol")
-    return (sqrt(h_b/(2*m*omega))*(a_raising(symbol)+a_lowering(symbol)))
+    return (sqrt(hbar/(2*m*omega))*(a_raising(symbol)+a_lowering(symbol)))
 
 
 
@@ -891,9 +891,9 @@ def harmonic(condition = None):
     if condition == None:
         return (p**2)/(2*m) + (1/2)*k*(x**2)
     if condition == ladder:
-        return h_b*omega*(a_lowering(symbol)*a_raising(symbol)-(1/2))
+        return hbar*omega*(a_lowering(symbol)*a_raising(symbol)-(1/2))
     if condition == ground_state:
-        return ((alpha/pi)**(1/4))*exp(-(1/2)*((m*omega)/h_b)*(x**2))
+        return ((alpha/pi)**(1/4))*exp(-(1/2)*((m*omega)/hbar)*(x**2))
     
 
 """ The following are for Spherical Harmonics """
@@ -930,15 +930,15 @@ def ang_mom_2(ang_mom, mag):
         The L^2 vector magnitude eigenvalue for spherical harmonics.
     
     Note:
-        Bra(str(j), str(","), str(m))*j*(j+1)*h_b**2*Ket(str(j), str(","), str(m))
+        Bra(str(j), str(","), str(m))*j*(j+1)*hbar**2*Ket(str(j), str(","), str(m))
     
     """
     
     j, m = symbols("j, m")
     if ang_mom == j and mag == m:
-        return Bra(str(j), str(","), str(m))*j*(j+1)*h_b**2*Ket(str(j), str(","), str(m))
+        return Bra(str(j), str(","), str(m))*j*(j+1)*hbar**2*Ket(str(j), str(","), str(m))
     if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(","), str(mag)):
-        return ang_mom*(ang_mom+1)*h_b**2
+        return ang_mom*(ang_mom+1)*hbar**2
     else:
         return 0 
 
@@ -954,15 +954,15 @@ def ang_mom_z(ang_mom, mag):
         The L_z projection (in the z direction) eigenvalue for spherical harmonics.
     
     Note:
-        Bra(str(j), str(","), str(m))*m*h_b*Ket(str(j), str(","), str(m))
+        Bra(str(j), str(","), str(m))*m*hbar*Ket(str(j), str(","), str(m))
     
     """
     
     j, m = symbols("j, m")
     if ang_mom == j and mag == m:
-        return Bra(str(j), str(","), str(m))*m*h_b*Ket(str(j), str(","), str(m))
+        return Bra(str(j), str(","), str(m))*m*hbar*Ket(str(j), str(","), str(m))
     if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(","), str(mag)):
-        return mag*h_b
+        return mag*hbar
     else:
         return 0 
 
@@ -979,7 +979,7 @@ def ang_mom_raising(ang_mom = None, mag = None):
         Else, the formula for the raising operator is computed using Dirac notation
     
     Note:
-        Bra(str(j), str(","), str(m))*h_b*sqrt(j*(j+1)-m*(m+1))*Ket(str(j), str(','), str(m+1))
+        Bra(str(j), str(","), str(m))*hbar*sqrt(j*(j+1)-m*(m+1))*Ket(str(j), str(','), str(m+1))
 
         .. math::
           \\langle j, m | \\hbar \\sqrt{ j (j+1) - m (m+1) }  | j, m+1 \\rangle
@@ -990,9 +990,9 @@ def ang_mom_raising(ang_mom = None, mag = None):
     if ang_mom == None and mag == None:
         return Operator(L_x) + I*Operator(L_y)
     if ang_mom == j and mag == m:
-        return Bra(str(j), str(","), str(m))*h_b*sqrt(j*(j+1)-m*(m+1))*Ket(str(j), str(','), str(m+1))
+        return Bra(str(j), str(","), str(m))*hbar*sqrt(j*(j+1)-m*(m+1))*Ket(str(j), str(','), str(m+1))
     if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(','), str(mag+1)):
-        return h_b*sqrt(ang_mom*(ang_mom+1)-mag*(mag+1))
+        return hbar*sqrt(ang_mom*(ang_mom+1)-mag*(mag+1))
     else:
         return 0 
 
@@ -1009,7 +1009,7 @@ def ang_mom_lowering(ang_mom = None, mag = None):
         Else, the formula for the lowering operator is computed using Dirac notation
     
     Note:
-        Bra(str(j), str(","), str(m))*h_b*sqrt(j*(j+1)-m*(m-1))*Ket(str(j), str(','), str(m-1))
+        Bra(str(j), str(","), str(m))*hbar*sqrt(j*(j+1)-m*(m-1))*Ket(str(j), str(','), str(m-1))
     
     """
         
@@ -1017,9 +1017,9 @@ def ang_mom_lowering(ang_mom = None, mag = None):
     if ang_mom == None and mag == None:
         return Operator(L_x) - I*Operator(L_y)
     if ang_mom == j and mag == m:
-        return  Bra(str(j), str(","), str(m))*h_b*sqrt(j*(j+1)-m*(m-1))*Ket(str(j), str(','), str(m-1))
+        return  Bra(str(j), str(","), str(m))*hbar*sqrt(j*(j+1)-m*(m-1))*Ket(str(j), str(','), str(m-1))
     if (str(ang_mom), str(","), str(mag)) == (str(ang_mom), str(','), str(mag-1)):
-        return h_b*sqrt(ang_mom*(ang_mom+1)-mag*(mag-1))
+        return hbar*sqrt(ang_mom*(ang_mom+1)-mag*(mag-1))
     else: 
         return 0 
 
