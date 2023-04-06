@@ -58,4 +58,3 @@ ________________________________________________________________________________
 This code is created by Elizabeth Stippell, Lauryn Jerz under the guidance of Dr. Alexey Akimov at the University at Buffalo
 
 Year: 2020
->>>>>>> a4f82647d44132ad313b967d421082d2b21c9708
