@@ -40,7 +40,7 @@ def comm_1(commutator_1, commutator_2, aux):
 
     """
     
-    return expand((Commutator(Operator(commutator_1), Operator(commutator_2))*aux).doit())
+    return expand(Operator(commutator_1)*Operator(commutator_2)*aux-Operator(commutator_2)*Operator(commutator_1)*aux)
 
 
 
@@ -319,16 +319,32 @@ def expression_replace(expr, var):
             two = f"Derivative({term2}, {var}), {var})"
 
         else:
-            term1 = expr[starting_pos + len(f"Derivative(1, {var})") + 1:wn]
-            if len(f"{var}") == 1:
-                term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 + 2:fn]
-            if len(f"{var}") == 2:
-                term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 + 1:fn]
-            if len(f"{var}") == 3:
-                term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 :fn]
+            find_exp = starting_pos + len(f"Derivative(1, {var})")
+            if expr[find_exp:find_exp+2] == "**":
+                term1 = expr[find_exp+4:wn]
+                one = f"Derivative({term1}, ({var}, {expr[find_exp+2]}))"
 
-            one = f"Derivative({term1}, {var})"
-            two = f"Derivative({term2}, {var})"
+            find_exp = starting_pos + second + len(f"Derivative(1, {var})")*2 + 1
+            if expr[find_exp:find_exp+2] == "**":
+                term2 = expr[find_exp+4:fn]
+                two = f"Derivative({term2}, ({var}, {expr[find_exp+2]}))"
+
+            else:
+                term1 = expr[starting_pos + len(f"Derivative(1, {var})") + 1:wn]
+                if len(f"{var}") == 1:
+                    test = starting_pos + second + len(f"Derivative(1, {var})")*2 + 1
+                    term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 + 2:fn]
+                    one = f"Derivative({term1}, {var})"
+                    two = f"Derivative({term2}, {var})"
+                    term1 = expr[starting_pos + len(f"Derivative(1, {var})") + 1:wn]
+                if len(f"{var}") == 2:
+                    term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 + 1:fn]
+                    one = f"Derivative({term1}, {var})"
+                    two = f"Derivative({term2}, {var})"
+                if len(f"{var}") == 3:
+                    term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 :fn]
+                    one = f"Derivative({term1}, {var})"
+                    two = f"Derivative({term2}, {var})"
 
         x1 = expr.replace(expr[starting_pos + second + 17: fn], two).replace(expr[starting_pos: wn], one)
         x2 = sympify(x1).doit()
