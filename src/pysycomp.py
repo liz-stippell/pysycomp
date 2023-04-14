@@ -332,7 +332,6 @@ def expression_replace(expr, var):
             else:
                 term1 = expr[starting_pos + len(f"Derivative(1, {var})") + 1:wn]
                 if len(f"{var}") == 1:
-                    test = starting_pos + second + len(f"Derivative(1, {var})")*2 + 1
                     term2 = expr[starting_pos + second + len(f"Derivative(1, {var})")*2 + 2:fn]
                     one = f"Derivative({term1}, {var})"
                     two = f"Derivative({term2}, {var})"
