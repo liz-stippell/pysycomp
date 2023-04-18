@@ -1112,7 +1112,7 @@ def time_deriv(var, order = 1):
     aux = Operator(Function("f")(q))
     pq_s = (Operator(p)*Operator(q)+Operator(q)*Operator(p))/2
     
-    h1 = str(expand(comm_1(ham(p, q), Operator(var**order), f(q))))
+    h1 = expand(ham(p, q)*Operator(var**order)*aux-Operator(var**order)*ham(p, q)*aux)
 
     
     if var == V:
