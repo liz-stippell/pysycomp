@@ -1227,6 +1227,7 @@ def time_deriv(var, order = 1):
         
         
     string = " ".join(temp)
+    string = string.replace("v(q)*p*q*f(q)", "f(q)")
     if "(*" in string:
         string = string.replace("(*", "(")
     s = sympify(string)
@@ -1237,6 +1238,7 @@ def time_deriv(var, order = 1):
             s1 = -s1/2
     else:
         repl = 0
+    s1 = str(s1).replace("p*q*f(q)*v(q)", "q*Derivative(v(q), q)")
     s2 = str(s1).replace("hbar*i", "1").replace("I", "1").replace("f(q)", f"{repl}").replace(f"hbar**2*i**2*Derivative({repl}, q)", "p").replace(f"Derivative({repl}, q)", "p").replace("hbar**2*i**2", "1").replace("Derivative(v(q), (q, 2))", "0")
   
         
