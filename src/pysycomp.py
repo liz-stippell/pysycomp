@@ -39,8 +39,12 @@ def comm_1(commutator_1, commutator_2, aux):
         The commutator of commutator_1 and commutator_2 with respect to the auxiliary function.
 
     """
-    
-    return expand(Operator(commutator_1)*Operator(commutator_2)*aux-Operator(commutator_2)*Operator(commutator_1)*aux)
+    if commutator_1 == ham(p, q):
+        return expand(commutator_1*Operator(commutator_2)*aux-Operator(commutator_2)*commutator_1*aux)
+    if commutator_2 == ham(p, q):
+        return expand(Operator(commutator_1)*commutator_2*aux-commutator_2*Operator(commutator_1)*aux)
+    else:
+        return expand(Operator(commutator_1)*Operator(commutator_2)*aux-Operator(commutator_2)*Operator(commutator_1)*aux)
 
 
 
@@ -1094,7 +1098,7 @@ def QHD_kinetic(var = None):
     """
     return QHD_int(p, 2)/(2*m)   
     
-def time_deriv1(var, order = 1):
+def time_deriv(var, order = 1):
     """
     Args:
         var: The variable of interest to take the time derivative of. For example, the position or momentum operator.
@@ -1108,8 +1112,7 @@ def time_deriv1(var, order = 1):
     aux = Operator(Function("f")(q))
     pq_s = (Operator(p)*Operator(q)+Operator(q)*Operator(p))/2
     
-    #h1 = (expand(((Commutator(Operator(var**(order)), ham(p, q)).expand(commutator=True))*aux).doit()))
-    h1 = expand(ham(p, q)*Operator(var**order)*aux-Operator(var**order)*ham(p, q)*aux)
+    h1 = str(expand(comm_1(ham(p, q), Operator(var**order), f(q))))
 
     
     if var == V:
@@ -1120,8 +1123,7 @@ def time_deriv1(var, order = 1):
         h1 = (str(simplify(h1)).replace("p", str(Operator(p1))))       
     
     else:
-        #h1 = str(expand(((Commutator(ham(p, q), Operator(var**(order))).expand(commutator=True))*aux).doit()))
-        h1 = str(expand(ham(p, q)*Operator(var**order)*aux-Operator(var**order)*ham(p, q)*aux))
+        h1 = str(expand(comm_1(ham(p, q), Operator(var**order), f(q))))
         h1 = h1.replace("pq_s", "((p*q+q*p))/2")
 
 
@@ -1246,13 +1248,6 @@ def time_deriv1(var, order = 1):
         return sympify(s2)              #/(i*hbar)
 
 
-def time_deriv(var, order = 1):
-    """
-    
-    The second step in computing the time derivative. Simplifies the time_deriv1 function.
-    
-    """
-    return time_deriv1(var, order)#/(i*hbar)
 
 def symmetrize(expr):
     """
