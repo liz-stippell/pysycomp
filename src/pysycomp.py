@@ -1102,7 +1102,7 @@ def time_deriv(var, order = 1):
     """
     Args:
         var: The variable of interest to take the time derivative of. For example, the position or momentum operator.
-        order: The order of the variable of interest. The default value is 1
+        order: The order of the exponent of the variable of interest. The default value is 1
         
     Returns:
         The time derivative of the variable of interest to the desired order.
