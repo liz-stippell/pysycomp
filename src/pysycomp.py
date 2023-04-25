@@ -1108,26 +1108,31 @@ def time_deriv(var, order = 1):
         The time derivative of the variable of interest to the desired order.
     
     """
-    pq_s = Symbol("pq_s")
-    aux = Operator(Function("f")(q))
-    pq_s = (Operator(p)*Operator(q)+Operator(q)*Operator(p))/2
-    
-    h1 = expand(ham(p, q)*Operator(var**order)*aux-Operator(var**order)*ham(p, q)*aux)
 
-    
-    if var == V:
-        der = f'((p)*(Derivative(V, q, {order}+1))+(Derivative(V, q, {order}+1))*(p))/2/m'
+    aux = f(q)
     
     if var == p:
-        p1 = lin_mom(q, order)
-        h1 = (str(simplify(h1)).replace("p", str(Operator(p1))))       
+        h1 = expand(Operator(var**order)*ham(p, q)*aux - ham(p, q)*Operator(var**order)*aux)
+        h2 = str(h1).replace("/(2*mass)", "*0")
+
+        if order == 1:
+            str_repl = "p"
+        else:
+            str_repl = f"p**{order}"
+        h3 = h2.replace(str_repl, f"{lin_mom(q, order)}")
+
+        h1 = str(h3)
+    
+#    if var == V:
+#        der = f'((p)*(Derivative(V, q, {order}+1))+(Derivative(V, q, {order}+1))*(p))/2/m'
+    
     
     else:
-        h1 = str(expand(comm_1(ham(p, q), Operator(var**order), f(q))))
-        h1 = h1.replace("pq_s", "((p*q+q*p))/2")
+        h1 = str(comm_1(Operator(var**order), ham(p, q), f(q)))
 
 
-    
+    pq_s = Symbol("pq_s")
+
     start_points = []
     end_points = []
 
@@ -1136,27 +1141,26 @@ def time_deriv(var, order = 1):
     s = h1.find("Derivative(1, q)", start)
     while s != -1:
         s = h1.find("Derivative(1, q)", start)
-                
+
         if var == pq_s:
             start = s + len(f"Derivative(1, q) ")
         else:
             start = s + len(f"Derivative(1, q)")
-        
+
         start_points.append(s)
         if s == -1:
             break
-               
+
         if var == pq_s:
             e = h1.find(" ", start + 1)
         else:
             e = h1.find("f(q)", start) + 4            
-        
+
         end_points.append(e)
-    
-   
+
     if start_points[-1] == -1:
         start_points.remove(start_points[-1])
-    
+
     new_derivative_function = []
     replace_spot = []
 
@@ -1168,7 +1172,7 @@ def time_deriv(var, order = 1):
         repl = h1[start_points[i]:end_points[i]].find("1") + start_points[i]
         replace_spot.append(repl)
 
-        
+
         if var == p:
             new_func = h1[func1:end_points[i]]
             new_derivative_function.append(new_func)    
@@ -1188,7 +1192,7 @@ def time_deriv(var, order = 1):
             st = 1
         else:
             st = 0
-            
+
         for r in range(st, len(new_derivative_function)):
 
             if temp[i].find(new_derivative_function[r]) != -1:
@@ -1219,35 +1223,41 @@ def time_deriv(var, order = 1):
         for i in range(len(nested_list)):
             temp[nested_list[i][0]] = \
                 temp[nested_list[i][0]].replace(temp[nested_list[i][0]][nested_list[i][1]], new_derivative_function[i][1:])  
-    
+
     else:
         for i in range(len(nested_list)):
             temp[nested_list[i][0]] = \
                 temp[nested_list[i][0]].replace(temp[nested_list[i][0]][nested_list[i][1]], "1/" + new_derivative_function[i][1:])
-        
-        
+
+
     string = " ".join(temp)
     string = string.replace("v(q)*p*q*f(q)", "f(q)")
     if "(*" in string:
         string = string.replace("(*", "(")
     s = sympify(string)
+
     s1 = expand(s.doit())
+
     if var == p:
         repl = 1
-        if order == 2:
-            s1 = -s1/2
+    #    s1 = s1/order
     else:
         repl = 0
-    s1 = str(s1).replace("p*q*f(q)*v(q)", "q*Derivative(v(q), q)")
-    s2 = str(s1).replace("hbar*i", "1").replace("I", "1").replace("f(q)", f"{repl}").replace(f"hbar**2*i**2*Derivative({repl}, q)", "p").replace(f"Derivative({repl}, q)", "p").replace("hbar**2*i**2", "1").replace("Derivative(v(q), (q, 2))", "0")
-  
-        
+    s1 = str(s1).replace("p*q*f(q)*v(q)", "-q*Derivative(v(q), q)")
+    s2 = str(s1).replace("Derivative(f(q), q)", "p").replace("Derivative(f(q), (q, 2))", "p**2").replace("f(q)", f"{repl}")
+
+
+    if var == p and order > 1:
+        s2 = s2.replace(f"Derivative(v(q), (q, {order}))", "0")
+
+    s4 = str(s2).replace("hbar", "1").replace("i**2", "-1").replace("i*", "1*")
+
     if var == V:
-        return sympify(der)    #/(i*hbar)
+        return (sympify(der))    #/(i*hbar)
     if var == p:
-        return -sympify(s2)
+        return (sympify(s4))
     else:
-        return sympify(s2)              #/(i*hbar)
+        return (sympify(s4))              #/(i*hbar)
 
 
 
