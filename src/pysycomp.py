@@ -428,7 +428,7 @@ def PIB_normalized(x, L, n):
 
 
 
-def PIB_2D(x, y, L_x, L_y, n):
+def PIB_2D(x, y, L_x, L_y, n_x, n_y):
     """
     
     Args:
@@ -442,9 +442,9 @@ def PIB_2D(x, y, L_x, L_y, n):
         The WaveFunction for Particle in a Box in two dimensions with respect to the chosen parameters.
     
     """
-    return  sin((n*pi*x)/L_x)*sin((n*pi*y)/L_y)
+    return  sin((n_x*pi*x)/L_x)*sin((n_y*pi*y)/L_y)
 
-def PIB_2D_normalized(x, y, L_x, L_y, n):
+def PIB_2D_normalized(x, y, L_x, L_y, n_x, n_y):
     """
     
     Args:
@@ -459,7 +459,7 @@ def PIB_2D_normalized(x, y, L_x, L_y, n):
         calculated using the normalization_constant() function.
     
     """
-    return sqrt(2/L_x)*sin((n*pi*x)/L_x)*sqrt(2/L_y)*sin((n*pi*y)/L_y)
+    return sqrt(2/L_x)*sin((n_x*pi*x)/L_x)*sqrt(2/L_y)*sin((n_y*pi*y)/L_y)
 
 
 
