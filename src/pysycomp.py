@@ -432,11 +432,12 @@ def PIB_2D(x, y, L_x, L_y, n_x, n_y):
     """
     
     Args:
-        x: a variable.
-        y: a variable.
+        x: A variable.
+        y: A variable.
         L_x: Length of the box in the x direction
         L_y: Length of the box in the y direction
-        n: an integer.
+        n_x: The x-value quantum number, represented by an integer
+        n_y: The y-value quantum number, represented by an integer
     
     Returns:
         The WaveFunction for Particle in a Box in two dimensions with respect to the chosen parameters.
@@ -448,11 +449,12 @@ def PIB_2D_normalized(x, y, L_x, L_y, n_x, n_y):
     """
     
     Args:
-        x: a variable.
-        y: a variable.
+        x: A variable.
+        y: A variable.
         L_x: Length of the box in the x direction
         L_y: Length of the box in the y direction
-        n: an integer.
+        n_x: The x-value quantum number, represented by an integer
+        n_y: The y-value quantum number, represented by an integer
     
     Returns:
         The normalized WaveFunction for Particle in a Box, with respect to the chosen variables. This answer at this time cannot be 
