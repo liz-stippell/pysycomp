@@ -50,6 +50,16 @@ gaussian_wavepackets (Gaussian Wave Packets - in progress)
 
 ___________________________________________________________________________________________________________________________________
 
+
+## PySyComp in Literature
+
+<a href="https://pubs.acs.org/doi/10.1021/acs.jchemed.2c00974" Target="_blank">PySyComp: A Symbolic Python Library for the Undergraduate Quantum Chemistry Course</a>
+
+<b>Cite PySyComp:</b> <br>
+Elizabeth Stippell, Alexey V. Akimov, and Oleg V. Prezhdo
+<i>Journal of Chemical Education</i> <b>2023</b> <i>100</i> (10), 4077-4084
+DOI: 10.1021/acs.jchemed.2c00974
+
 =======
 
 
