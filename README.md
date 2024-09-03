@@ -65,6 +65,6 @@ DOI: 10.1021/acs.jchemed.2c00974
 
 ## Authors
 
-This code is created by Elizabeth Stippell, Lauryn Jerz under the guidance of Dr. Alexey Akimov at the University at Buffalo
+This code is created by Elizabeth Stippell under the guidance of Dr. Alexey Akimov at the University at Buffalo and Dr. Oleg Prezhdo at the University of Southern California.
 
 Year: 2020
